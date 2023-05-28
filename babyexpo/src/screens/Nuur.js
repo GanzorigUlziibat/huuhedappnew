@@ -13,7 +13,6 @@ export default function Nuur() {
     return (
         <SafeAreaView style={styles.container}>
         <Tabs></Tabs>
-        <Text>Nuur</Text>
         </SafeAreaView>
     )
 }
