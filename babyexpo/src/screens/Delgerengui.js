@@ -7,37 +7,41 @@ import {
   StyleSheet,
   Platform,
   Image,
+  Pressable,
 } from "react-native";
 import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-export default function Delgerengui() {
+export default function Delgerengui({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.animal}>
-        <AntDesign name="arrowleft" style={styles.headicon}></AntDesign>
-        <Text style={styles.ugnuud}>Амьтад</Text>
+    <Pressable onPress={() => navigation.goBack()}>
+      <View style={styles.thead}>
+        <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
+        <Text style={styles.thtxt}>Амьтад</Text>
       </View>
+      </Pressable>
       <ScrollView>
+      <View style={styles.items}>
         <View>
-          <Text style={styles.ugnuud}></Text>
           <Image
-            style={styles.family}
+            style={styles.i}
             source={require("../images/123.jpg")}
           ></Image>
         </View>
         <View>
           <Image
-            style={styles.family2}
+            style={styles.i}
             source={require("../images/fox.png")}
           ></Image>
         </View>
 
         <View>
           <Image
-            style={styles.family1}
+            style={styles.i}
             source={require("../images/cat.png")}
           ></Image>
+        </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -48,43 +52,35 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
-  family: {
-    width: 110,
-    height: 160,
-    marginTop: 20,
-    borderRadius: 12,
-    marginLeft: 8,
-    borderWidth: 5,
-    borderColor: "purple",
+  thtxt: {
+    fontSize: 20,
+    color: "white",
+    fontWeight: "400"
   },
-  ugnuud: {
-    fontSize: 25,
-  },
-  animal: {
+  thead: {
     flexDirection: "row",
     alignItems: "center",
-    height: 70,
+    height: 60,
+    backgroundColor: "#5D3FD3"
   },
-  headicon: {
+  thicon: {
     fontSize: 25,
+    color: "white",
+    margin: 5,
+  },
+  items: {
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
     margin: 10,
   },
-  family1: {
-    width: 110,
+  i: {
+    width: 120,
     height: 160,
     borderRadius: 12,
-    marginTop: -160,
-    marginLeft: 281,
     borderWidth: 5,
+    margin: 5,
     borderColor: "purple",
   },
-  family2: {
-    width: 110,
-    height: 160,
-    marginTop: -160,
-    marginLeft: 140,
-    borderRadius: 12,
-    borderWidth: 5,
-    borderColor: "purple",
-  },
+
 });
