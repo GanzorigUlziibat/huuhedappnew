@@ -136,10 +136,11 @@ export default function Tabs() {
     <TabBar
       {...props}
       renderIcon={({ route, color }) => (
-        <FontAwesome5 name={route.icon} size={50} color={color}></FontAwesome5>
+        <FontAwesome5 name={route.icon} style={{ marginTop: 10 }} size={40} color={color}></FontAwesome5>
       )}
       style={styles.tab}
-      indicatorStyle={{ backgroundColor: "white" }}
+      tabStyle={{ width: 80 }}
+      indicatorStyle={{ backgroundColor: 'white', }}
       scrollEnabled={true}
     />
   );
