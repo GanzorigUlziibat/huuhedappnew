@@ -105,10 +105,11 @@ const renderTabBar = props => (
     <TabBar 
     {...props} 
     renderIcon={({ route,color }) => (
-    <FontAwesome5 name={route.icon} size={50} color={color}></FontAwesome5>
+    <FontAwesome5 name={route.icon} style={{marginTop: 10}} size={40} color={color}></FontAwesome5>
     )}
     style={styles.tab}
-    indicatorStyle={{ backgroundColor: 'white' }}
+    tabStyle={{ width: 80 }}
+    indicatorStyle={{ backgroundColor: 'white', }}
     scrollEnabled={true}
 />
   );
@@ -120,7 +121,6 @@ const renderTabBar = props => (
       onIndexChange={setIndex}
       renderTabBar={renderTabBar}
       initialLayout={{ width: layout.width }}
-      
     />
     </SafeAreaView>
   );
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     height: 100,
+    padding: 5,
     backgroundColor: '#5D3FD3',
   },
   thtab: {
