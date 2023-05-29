@@ -6,95 +6,38 @@ import {
   Text,
   SafeAreaView,
   Platform,
-<<<<<<< Updated upstream
-StatusBar,
-Pressable,
-Image,
-ScrollView} from 'react-native';
-import { TabView, SceneMap,TabBar  } from 'react-native-tab-view';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-=======
   StatusBar,
   Pressable,
-  ScrollView,
   Image,
+  ScrollView,
 } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
->>>>>>> Stashed changes
 const FirstRoute = () => (
   <View style={styles.tabcontainer}>
     <View style={styles.thtab}>
       <Text style={styles.thtext}>Амьтан</Text>
     </View>
-    <ScrollView>
+    <View>
       <View>
-        <Pressable>
-          <View>
-            <Image
-              style={styles.simba}
-              source={require("../images/123.jpg")}
-            ></Image>
-
-            <Text>Тахь</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View>
-            <Image
-              style={styles.simba}
-              source={require("../images/zebra.png")}
-            ></Image>
-
-            <Text>Арслан</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View>
-            <Image
-              style={styles.simba}
-              source={require("../images/cat.png")}
-            ></Image>
-
-            <Text>Муур</Text>
-          </View>
-        </Pressable>
+        <Pressable></Pressable>
       </View>
-    </ScrollView>
+    </View>
   </View>
 );
 
 const SecondRoute = () => (
-<<<<<<< Updated upstream
-<View style={styles.tabcontainer}>
-  <View style={styles.thtab}><Text style={styles.thtext}>Хүнс</Text></View>
-  <ScrollView>
-      <View>
-        <Pressable>
-          <View></View>
-        </Pressable>
-      </View>
-  </ScrollView>
-  </View>);
-const ThirdRoute = () => (
-  <View style={styles.tabcontainer}>
-  <View style={styles.thtab}><Text style={styles.thtext}>Миний</Text></View>
-  <ScrollView>
-      <View>
-        <Pressable>
-          <View></View>
-        </Pressable>
-      </View>
-  </ScrollView>
-=======
   <View style={styles.tabcontainer}>
     <View style={styles.thtab}>
       <Text style={styles.thtext}>Хүнс</Text>
     </View>
-    <Pressable>
-      <ScrollView></ScrollView>
-    </Pressable>
-    <View></View>
+    <ScrollView>
+      <View>
+        <Pressable>
+          <View></View>
+        </Pressable>
+      </View>
+    </ScrollView>
   </View>
 );
 const ThirdRoute = () => (
@@ -102,8 +45,13 @@ const ThirdRoute = () => (
     <View style={styles.thtab}>
       <Text style={styles.thtext}>Миний</Text>
     </View>
-    <View></View>
->>>>>>> Stashed changes
+    <ScrollView>
+      <View>
+        <Pressable>
+          <View></View>
+        </Pressable>
+      </View>
+    </ScrollView>
   </View>
 );
 
@@ -230,20 +178,10 @@ const styles = StyleSheet.create({
   thtext: {
     color: "white",
     fontSize: 18,
-<<<<<<< Updated upstream
-    fontWeight: "500"
+    fontWeight: "500",
   },
   navimg: {
     width: 50,
     height: 50,
-  }
-});
-=======
-    fontWeight: "500",
-  },
-  simba: {
-    height: 95,
-    width: 95,
   },
 });
->>>>>>> Stashed changes
