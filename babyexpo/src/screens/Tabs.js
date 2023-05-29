@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   View,
   useWindowDimensions,
@@ -6,57 +6,50 @@ import {
   Text,
   SafeAreaView,
   Platform,
-<<<<<<< Updated upstream
-StatusBar,
-Pressable,
-Image,
-ScrollView} from 'react-native';
-import { TabView, SceneMap,TabBar  } from 'react-native-tab-view';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-=======
   StatusBar,
-  Pressable,
   ScrollView,
-  Image,
-} from "react-native";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
->>>>>>> Stashed changes
+  Pressable,
+  Image
+} from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 const FirstRoute = () => (
   <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Амьтан</Text>
+    <View style={styles.thtab}><Text style={styles.thtext}>Амьтан</Text></View>
+    <View>
     </View>
+  </View>
+);
+
+const SecondRoute = () => (
+  <View style={styles.tabcontainer}>
+    <View style={styles.thtab}><Text style={styles.thtext}>Хүнс</Text></View>
+    <View>
+    </View>
+  </View>);
+const ThirdRoute = () => (
+  <View style={styles.tabcontainer}>
+    <View style={styles.thtab}><Text style={styles.thtext}>Миний</Text></View>
+    <View>
+    </View>
+  </View>
+);
+
+const FourthRoute = () => (
+  <View style={styles.tabcontainer}>
+    <View style={styles.thtab}><Text style={styles.thtext}>Гэр</Text></View>
+    <View>
+    </View>
+  </View>
+);
+const FifthRoute = () => (
+  <View style={styles.tabcontainer}>
+    <View style={styles.thtab}><Text style={styles.thtext}>Тээврийн хэрэгсэл</Text></View>
     <ScrollView>
-      <View>
+      <View >
         <Pressable>
-          <View>
-            <Image
-              style={styles.simba}
-              source={require("../images/123.jpg")}
-            ></Image>
-
-            <Text>Тахь</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View>
-            <Image
-              style={styles.simba}
-              source={require("../images/zebra.png")}
-            ></Image>
-
-            <Text>Арслан</Text>
-          </View>
-        </Pressable>
-        <Pressable>
-          <View>
-            <Image
-              style={styles.simba}
-              source={require("../images/cat.png")}
-            ></Image>
-
-            <Text>Муур</Text>
+          <View style={styles.v0}>
+            <Image style={styles.v0icon}></Image>
           </View>
         </Pressable>
       </View>
@@ -64,109 +57,45 @@ const FirstRoute = () => (
   </View>
 );
 
-const SecondRoute = () => (
-<<<<<<< Updated upstream
-<View style={styles.tabcontainer}>
-  <View style={styles.thtab}><Text style={styles.thtext}>Хүнс</Text></View>
-  <ScrollView>
-      <View>
-        <Pressable>
-          <View></View>
-        </Pressable>
-      </View>
-  </ScrollView>
-  </View>);
-const ThirdRoute = () => (
-  <View style={styles.tabcontainer}>
-  <View style={styles.thtab}><Text style={styles.thtext}>Миний</Text></View>
-  <ScrollView>
-      <View>
-        <Pressable>
-          <View></View>
-        </Pressable>
-      </View>
-  </ScrollView>
-=======
-  <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Хүнс</Text>
-    </View>
-    <Pressable>
-      <ScrollView></ScrollView>
-    </Pressable>
-    <View></View>
-  </View>
-);
-const ThirdRoute = () => (
-  <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Миний</Text>
-    </View>
-    <View></View>
->>>>>>> Stashed changes
-  </View>
-);
-
-const FourthRoute = () => (
-  <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Гэр</Text>
-    </View>
-    <View></View>
-  </View>
-);
-const FifthRoute = () => (
-  <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text>
-    </View>
-    <View></View>
-  </View>
-);
-
 const SixthRoute = () => (
   <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text>
+    <View style={styles.thtab}><Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text></View>
+    <View>
     </View>
-    <View></View>
   </View>
 );
 const SeventhRoute = () => (
   <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Цаг агаар, цаг</Text>
+    <View style={styles.thtab}><Text style={styles.thtext}>Цаг агаар, цаг</Text></View>
+    <View>
     </View>
-    <View></View>
   </View>
 );
 const EightthRoute = () => (
   <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Далбаа</Text>
+    <View style={styles.thtab}><Text style={styles.thtext}>Далбаа</Text></View>
+    <View>
     </View>
-    <View></View>
   </View>
 );
 const NinethRoute = () => (
   <View style={styles.tabcontainer}>
-    <View style={styles.thtab}>
-      <Text style={styles.thtext}>Бидний тухай</Text>
+    <View style={styles.thtab}><Text style={styles.thtext}>Бидний тухай</Text></View>
+    <View>
     </View>
-    <View></View>
   </View>
 );
 
 const renderScene = SceneMap({
-  1: FirstRoute,
-  2: SecondRoute,
-  3: ThirdRoute,
-  4: FourthRoute,
-  5: FifthRoute,
-  6: SixthRoute,
-  7: SeventhRoute,
-  8: EightthRoute,
-  9: NinethRoute,
+  '1': FirstRoute,
+  '2': SecondRoute,
+  '3': ThirdRoute,
+  '4': FourthRoute,
+  '5': FifthRoute,
+  '6': SixthRoute,
+  '7': SeventhRoute,
+  '8': EightthRoute,
+  '9': NinethRoute,
 });
 
 export default function Tabs() {
@@ -174,24 +103,25 @@ export default function Tabs() {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "1", icon: "dog" },
-    { key: "2", icon: "hamburger" },
-    { key: "3", icon: "baby" },
-    { key: "4", icon: "home" },
-    { key: "5", icon: "car" },
-    { key: "6", icon: "sort-numeric-up" },
-    { key: "7", icon: "cloud-sun" },
-    { key: "8", icon: "flag" },
-    { key: "9", icon: "info" },
+    { key: '1', icon: 'dog', },
+    { key: '2', icon: 'hamburger' },
+    { key: '3', icon: 'baby' },
+    { key: '4', icon: 'home' },
+    { key: '5', icon: 'car' },
+    { key: '6', icon: 'sort-numeric-up' },
+    { key: '7', icon: 'cloud-sun' },
+    { key: '8', icon: 'flag' },
+    { key: '9', icon: 'info' },
   ]);
-  const renderTabBar = (props) => (
+  const renderTabBar = props => (
     <TabBar
       {...props}
       renderIcon={({ route, color }) => (
-        <FontAwesome5 name={route.icon} size={50} color={color}></FontAwesome5>
+        <FontAwesome5 name={route.icon} style={{ marginTop: 10 }} size={40} color={color}></FontAwesome5>
       )}
       style={styles.tab}
-      indicatorStyle={{ backgroundColor: "white" }}
+      tabStyle={{ width: 80 }}
+      indicatorStyle={{ backgroundColor: 'white', }}
       scrollEnabled={true}
     />
   );
@@ -214,7 +144,8 @@ const styles = StyleSheet.create({
   },
   tab: {
     height: 100,
-    backgroundColor: "#5D3FD3",
+    padding: 5,
+    backgroundColor: '#5D3FD3',
   },
   thtab: {
     backgroundColor: "#5D3FD3",
@@ -230,20 +161,6 @@ const styles = StyleSheet.create({
   thtext: {
     color: "white",
     fontSize: 18,
-<<<<<<< Updated upstream
     fontWeight: "500"
-  },
-  navimg: {
-    width: 50,
-    height: 50,
   }
 });
-=======
-    fontWeight: "500",
-  },
-  simba: {
-    height: 95,
-    width: 95,
-  },
-});
->>>>>>> Stashed changes
