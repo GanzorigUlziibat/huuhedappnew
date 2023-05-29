@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     width: 130,
     height: 180,
     borderRadius: 12,
+    borderWidth: 3,
+    borderColor: "blue",
   },
   faimg1: {
     marginTop: -180,
@@ -44,6 +46,8 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 12,
     marginLeft: 140,
+    borderWidth: 3,
+    borderColor: "blue",
   },
   faimg2: {
     marginTop: -180,
@@ -51,6 +55,8 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 12,
     marginLeft: 280,
+    borderWidth: 3,
+    borderColor: "blue",
   },
   faicon: {
     fontSize: 25,
