@@ -2,42 +2,76 @@ import * as React from 'react';
 import { View, 
   useWindowDimensions,
   StyleSheet, 
-  Text} from 'react-native';
+  Text,
+  SafeAreaView,
+  Platform,
+StatusBar} from 'react-native';
 import { TabView, SceneMap,TabBar  } from 'react-native-tab-view';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 const FirstRoute = () => (
   <View style={styles.tabcontainer}>
-  <View style={styles.thtab}><Text>Амьтан</Text></View>
+  <View style={styles.thtab}><Text style={styles.thtext}>Амьтан</Text></View>
   <View>
   </View>
   </View>
 );
 
 const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-);
+<View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Хүнс</Text></View>
+  <View>
+  </View>
+  </View>);
 const ThirdRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Миний</Text></View>
+  <View>
+  </View>
+  </View>
 );
 
 const FourthRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Гэр</Text></View>
+  <View>
+  </View>
+  </View>
 );
 const FifthRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Тээврийн хэрэгсэл</Text></View>
+  <View>
+  </View>
+  </View>
 );
 
 const SixthRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text></View>
+  <View>
+  </View>
+  </View>
 );
 const SeventhRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Цаг агаар, цаг</Text></View>
+  <View>
+  </View>
+  </View>
 );
 const EightthRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Далбаа</Text></View>
+  <View>
+  </View>
+  </View>
 );
 const NinethRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+  <View style={styles.tabcontainer}>
+  <View style={styles.thtab}><Text style={styles.thtext}>Бидний тухай</Text></View>
+  <View>
+  </View>
+  </View>
 );
 
 const renderScene = SceneMap({
@@ -75,30 +109,45 @@ const renderTabBar = props => (
     )}
     style={styles.tab}
     indicatorStyle={{ backgroundColor: 'white' }}
+    scrollEnabled={true}
 />
   );
   return (
+  <SafeAreaView style={styles.container}>
     <TabView
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
       renderTabBar={renderTabBar}
       initialLayout={{ width: layout.width }}
+      
     />
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
   tab: {
     height: 100,
-    backgroundColor: 'violet',
+    backgroundColor: '#5D3FD3',
   },
   thtab: {
-    backgroundColor: "violet",
+    backgroundColor: "#5D3FD3",
     height: 55,
     marginTop: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   tabcontainer: {
     flex: 1,
     backgroundColor: "white",
+  },
+  thtext: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "500"
   }
 });
