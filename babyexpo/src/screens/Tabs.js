@@ -5,7 +5,10 @@ import { View,
   Text,
   SafeAreaView,
   Platform,
-StatusBar} from 'react-native';
+StatusBar,
+Pressable,
+Image,
+ScrollView} from 'react-native';
 import { TabView, SceneMap,TabBar  } from 'react-native-tab-view';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 const FirstRoute = () => (
@@ -19,8 +22,15 @@ const FirstRoute = () => (
 const SecondRoute = () => (
 <View style={styles.tabcontainer}>
   <View style={styles.thtab}><Text style={styles.thtext}>Хүнс</Text></View>
-  <View>
-  </View>
+  <ScrollView>
+      <View>
+        <Pressable>
+          <View>
+            <Image style={styles.navimg} source={require('../image/navch.jpg')}/>
+          </View>
+        </Pressable>
+      </View>
+  </ScrollView>
   </View>);
 const ThirdRoute = () => (
   <View style={styles.tabcontainer}>
@@ -105,11 +115,10 @@ const renderTabBar = props => (
     <TabBar 
     {...props} 
     renderIcon={({ route,color }) => (
-    <FontAwesome5 name={route.icon} style={{marginTop: 10}} size={40} color={color}></FontAwesome5>
+    <FontAwesome5 name={route.icon} size={50} color={color}></FontAwesome5>
     )}
     style={styles.tab}
-    tabStyle={{ width: 80 }}
-    indicatorStyle={{ backgroundColor: 'white', }}
+    indicatorStyle={{ backgroundColor: 'white' }}
     scrollEnabled={true}
 />
   );
@@ -121,6 +130,7 @@ const renderTabBar = props => (
       onIndexChange={setIndex}
       renderTabBar={renderTabBar}
       initialLayout={{ width: layout.width }}
+      
     />
     </SafeAreaView>
   );
@@ -132,7 +142,6 @@ const styles = StyleSheet.create({
   },
   tab: {
     height: 100,
-    padding: 5,
     backgroundColor: '#5D3FD3',
   },
   thtab: {
@@ -150,5 +159,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     fontWeight: "500"
+  },
+  navimg: {
+    width: 50,
+    height: 50,
   }
 });
