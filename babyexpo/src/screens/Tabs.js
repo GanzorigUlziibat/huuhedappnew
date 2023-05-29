@@ -25,9 +25,7 @@ const SecondRoute = () => (
   <ScrollView>
       <View>
         <Pressable>
-          <View>
-            <Image style={styles.navimg} source={require('../image/navch.jpg')}/>
-          </View>
+          <View></View>
         </Pressable>
       </View>
   </ScrollView>
@@ -35,8 +33,13 @@ const SecondRoute = () => (
 const ThirdRoute = () => (
   <View style={styles.tabcontainer}>
   <View style={styles.thtab}><Text style={styles.thtext}>Миний</Text></View>
-  <View>
-  </View>
+  <ScrollView>
+      <View>
+        <Pressable>
+          <View></View>
+        </Pressable>
+      </View>
+  </ScrollView>
   </View>
 );
 
