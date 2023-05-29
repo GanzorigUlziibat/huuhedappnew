@@ -18,11 +18,14 @@ const FirstRoute = () => (
     <View style={styles.thtab}>
       <Text style={styles.thtext}>Амьтан</Text>
     </View>
-    <View>
-      <View>
-        <Pressable></Pressable>
-      </View>
-    </View>
+    <ScrollView>
+      <Pressable>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/poster1.png')}></Image>
+          <Text style={styles.postertext}>Амьтад</Text>
+        </View>
+      </Pressable>
+    </ScrollView>
   </View>
 );
 
@@ -181,8 +184,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
-  navimg: {
-    width: 50,
-    height: 50,
+  subview: {
+    margin: 15,
+    height: 70,
+    borderRadius: 20,
+    flexDirection: "row",
+    elevation: 10,
+    backgroundColor: "white",
+    alignItems: "center",
   },
+  postericon: {
+    margin: 20,
+    width: 55,
+    height: 55,
+  },
+  postertext: {
+    fontSize: 20,
+  }
 });
