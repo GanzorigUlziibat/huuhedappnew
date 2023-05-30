@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -15,10 +15,13 @@ import {
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
+import useInsert from "../hooks/useInsert";
+import useSelect from "../hooks/useSelect";
 
 export default function Tabs() {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
+  const [subListItems, setSubListItems] = useState([]);
 
   useEffect(() => {
     // Open the database connection
@@ -95,7 +98,7 @@ export default function Tabs() {
     // Select query
     db.transaction(tx => {
       try {
-        tx.executeSql('SELECT sub_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
           const result = rows._array;
           console.log(result);
         });
