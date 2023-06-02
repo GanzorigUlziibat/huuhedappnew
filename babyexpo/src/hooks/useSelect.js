@@ -1,10 +1,10 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import * as SQLite from 'expo-sqlite';
 export default (argcid) => {
     const [subListItems, setSubListItems] = useState([]);
 
     useEffect(() => {
-        const db = SQLite.openDatabase('../screens/babyDatabase.db');
+        const db = SQLite.openDatabase('babyDatabase.db');
 
         let mounted = true;
         // Select query

@@ -15,13 +15,14 @@ import {
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
-import useInsert from "../hooks/useInsert";
-import useSelect from "../hooks/useSelect";
+// import useInsert from "../hooks/useInsert";
+// import useSelect from "../hooks/useSelect";
 
 export default function Tabs() {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
-  const [subListItems, setSubListItems] = useState([]);
+  const [flatListItems, setFlatListItems] = useState([]);
+  // const [subListItems, setSubListItems] = useState([]);
 
   useEffect(() => {
     // Open the database connection
@@ -34,8 +35,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error creating table baby_cat:', error);
       }
-    }
-    );
+    });
     // Create a table baby_sub
     db.transaction(tx => {
       try {
@@ -96,27 +96,25 @@ export default function Tabs() {
     });
 
     // Select query
-    db.transaction(tx => {
+    db.transaction((tx) => {
       try {
-        tx.executeSql('SELECT * from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          console.log(result);
-        });
+        let mounted = true;
+        if (mounted) {
+        tx.executeSql('SELECT * from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id',
+        [],
+          (tx, results) => {
+            var temp = [];
+            for (let i = 0; i < results.rows.length; ++i)
+              temp.push(results.rows.item(i));
+            setFlatListItems(temp);
+          },);
+        }
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-      // tx.executeSql('SELECT * FROM baby_sub', [], (_, { rows }) => {
-      //   const result = rows._array;
-      //   console.log(result);
-      // });
-      // tx.executeSql('SELECT * FROM baby_subitem', [], (_, { rows }) => {
-      //   const result = rows._array;
-      //   console.log(result);
-      // });
-      // tx.executeSql('SELECT * FROM baby_subitemcount', [], (_, { rows }) => {
-      //   const result = rows._array;
-      //   console.log(result);
-      // });
+      return function cleanup() {
+        mounted = false;
+      };
     });
   }, []);
 
@@ -533,7 +531,7 @@ export default function Tabs() {
       scrollEnabled={true}
     />
   );
-  return (
+  return(
     <SafeAreaView style={styles.container}>
       <TabView
         navigationState={{ index, routes }}
@@ -542,6 +540,8 @@ export default function Tabs() {
         renderTabBar={renderTabBar}
         initialLayout={{ width: layout.width }}
       />
+      
+      
     </SafeAreaView>
   );
 }
