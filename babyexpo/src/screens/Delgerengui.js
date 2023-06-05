@@ -26,20 +26,20 @@ export default function Delgerengui({navigation}) {
         <View>
           <Image
             style={styles.i}
-            source={require("../images/123.jpg")}
+            source={require("../images/pngtree.jpg")}
           ></Image>
         </View>
         <View>
           <Image
             style={styles.i}
-            source={require("../images/fox.png")}
+            source={require("../images/pngtree.jpg")}
           ></Image>
         </View>
 
         <View>
           <Image
             style={styles.i}
-            source={require("../images/cat.png")}
+            source={require("../images/pngtree.jpg")}
           ></Image>
         </View>
         </View>

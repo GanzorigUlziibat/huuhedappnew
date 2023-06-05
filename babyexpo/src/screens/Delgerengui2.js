@@ -11,13 +11,13 @@ export default function Delgerengui2() {
       </View>
     <ScrollView>
     <View>
-      <Image style={styles.faimg} source={require('../images/child.jpg')}/>
+      <Image style={styles.faimg} source={require('../images/pngtree.jpg')}/>
     </View>
     <View>
-      <Image style={styles.faimg1} source={require('../images/grandma.jpg')}/>
+      <Image style={styles.faimg1} source={require('../images/pngtree.jpg')}/>
     </View>
     <View>
-      <Image style={styles.faimg2} source={require('../images/daddy.jpg')}/>
+      <Image style={styles.faimg2} source={require('../images/pngtree.jpg')}/>
     </View>
     </ScrollView>
     </SafeAreaView>

@@ -140,7 +140,7 @@ export default function Tabs() {
     for (i = 0; i < subListHuns.length; i++) {
       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
           {/* <Text style={styles.postertext}>Ногоо</Text> */}
           <Text style={styles.postertext}>{subListHuns[i].sub_name}</Text>
         </View>
@@ -153,32 +153,32 @@ export default function Tabs() {
         {/* 
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
       <View style={styles.subview1}>
-        <Image style={styles.postericon} source={require('../images/sub/poster7.png')}></Image>
+        <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
         <Text style={styles.postertext}>Ногоо</Text>
       </View>
     </Pressable>
     
     <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/poster8.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/sub8.png')}></Image>
           <Text style={styles.postertext}>Жимс</Text>
         </View>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/poster9.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/sub9.png')}></Image>
           <Text style={styles.postertext}>Хоол</Text>
         </View>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/poster10.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/sub10.png')}></Image>
           <Text style={styles.postertext}>Уух зүйлс</Text>
         </View>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/poster11.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
           <Text style={styles.postertext}>Амттан</Text>
         </View>
       </Pressable> */}
