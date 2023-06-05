@@ -140,7 +140,7 @@ export default function Tabs() {
     for (i = 0; i < subListHuns.length; i++) {
       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview1}>
-          <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
           {/* <Text style={styles.postertext}>Ногоо</Text> */}
           <Text style={styles.postertext}>{subListHuns[i].sub_name}</Text>
         </View>
@@ -153,32 +153,32 @@ export default function Tabs() {
         {/* 
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
       <View style={styles.subview1}>
-        <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
+        <Image style={styles.postericon} source={require('../images/sub/poster7.png')}></Image>
         <Text style={styles.postertext}>Ногоо</Text>
       </View>
     </Pressable>
     
     <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/posters/poster8.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/poster8.png')}></Image>
           <Text style={styles.postertext}>Жимс</Text>
         </View>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/posters/poster9.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/poster9.png')}></Image>
           <Text style={styles.postertext}>Хоол</Text>
         </View>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/posters/poster10.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/poster10.png')}></Image>
           <Text style={styles.postertext}>Уух зүйлс</Text>
         </View>
       </Pressable>
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/posters/poster11.png')}></Image>
+          <Image style={styles.postericon} source={require('../images/sub/poster11.png')}></Image>
           <Text style={styles.postertext}>Амттан</Text>
         </View>
       </Pressable> */}
@@ -197,37 +197,37 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster1.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub1.png')}></Image>
               <Text style={styles.postertext}>Амьтад</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster2.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub2.png')}></Image>
               <Text style={styles.postertext}>Амьтны үр төл</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster3.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub3.png')}></Image>
               <Text style={styles.postertext}>Шувуу</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster4.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub4.png')}></Image>
               <Text style={styles.postertext}>Далайн амьтад</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster5.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub5.png')}></Image>
               <Text style={styles.postertext}>Шавж</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster6.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub6.png')}></Image>
               <Text style={styles.postertext}>Үлэг гүрвэл</Text>
             </View>
           </Pressable>
@@ -257,31 +257,31 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster12.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub12.png')}></Image>
               <Text style={styles.postertext}>Гэр бүл</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster13.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub13.png')}></Image>
               <Text style={styles.postertext}>Тоглоом</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster14.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub14.png')}></Image>
               <Text style={styles.postertext}>Хувцас</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster15.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub15.png')}></Image>
               <Text style={styles.postertext}>Хүний бие</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster16.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub16.png')}></Image>
               <Text style={styles.postertext}>Хөгжмийн зэмсэг</Text>
             </View>
           </Pressable>
@@ -299,25 +299,25 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster17.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub17.png')}></Image>
               <Text style={styles.postertext}>Миний өрөө</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster18.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub18.png')}></Image>
               <Text style={styles.postertext}>Гал тогоо</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster19.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub19.png')}></Image>
               <Text style={styles.postertext}>Угаалгын өрөө</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster20.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub20.png')}></Image>
               <Text style={styles.postertext}>Манай гэр</Text>
             </View>
           </Pressable>
@@ -334,25 +334,25 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster21.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub21.png')}></Image>
               <Text style={styles.postertext}>Жижиг, дунд оврын</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster22.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub22.png')}></Image>
               <Text style={styles.postertext}>Олон нийтийн</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster23.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub23.png')}></Image>
               <Text style={styles.postertext}>Том оврын</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster24.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub24.png')}></Image>
               <Text style={styles.postertext}>Машины брэнд, лого</Text>
             </View>
           </Pressable>
@@ -370,37 +370,37 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster25.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub25.png')}></Image>
               <Text style={styles.postertext}>Өнгө</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster26.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub26.png')}></Image>
               <Text style={styles.postertext}>Дүрс</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster27.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub27.png')}></Image>
               <Text style={styles.postertext}>Тоо</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster28.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub28.png')}></Image>
               <Text style={styles.postertext}>Улаан цэг</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster29.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub29.png')}></Image>
               <Text style={styles.postertext}>Үсэг</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster30.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub30.png')}></Image>
               <Text style={styles.postertext}>Англи үсэг</Text>
             </View>
           </Pressable>
@@ -417,19 +417,19 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster31.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub31.png')}></Image>
               <Text style={styles.postertext}>Цаг агаар</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster32.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub32.png')}></Image>
               <Text style={styles.postertext}>Улирал</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster33.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub33.png')}></Image>
               <Text style={styles.postertext}>Цаг сурцгаая</Text>
             </View>
           </Pressable>
@@ -446,37 +446,37 @@ export default function Tabs() {
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster34.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub34.png')}></Image>
               <Text style={styles.postertext}>Ази</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster35.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub35.png')}></Image>
               <Text style={styles.postertext}>Африк</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster36.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub36.png')}></Image>
               <Text style={styles.postertext}>Европ</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster37.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub37.png')}></Image>
               <Text style={styles.postertext}>Далайн</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster38.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub38.png')}></Image>
               <Text style={styles.postertext}>Өмнөд америк</Text>
             </View>
           </Pressable>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster39.png')}></Image>
+              <Image style={styles.postericon} source={require('../images/sub/sub39.png')}></Image>
               <Text style={styles.postertext}>Хойд америк</Text>
             </View>
           </Pressable>
