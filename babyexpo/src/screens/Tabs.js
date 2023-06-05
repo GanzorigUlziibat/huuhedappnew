@@ -98,23 +98,25 @@ export default function Tabs() {
     // Select query
     db.transaction((tx) => {
       try {
-        let mounted = true;
-        if (mounted) {
-        tx.executeSql('SELECT * from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id',
-        [],
-          (tx, results) => {
-            var temp = [];
-            for (let i = 0; i < results.rows.length; ++i)
-              temp.push(results.rows.item(i));
-            setFlatListItems(temp);
-          },);
-        }
+        tx.executeSql('SELECT sub_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          console.log(result);
+        });
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-      return function cleanup() {
-        mounted = false;
-      };
+       // tx.executeSql('SELECT * FROM baby_sub', [], (_, { rows }) => {
+      //   const result = rows._array;
+      //   console.log(result);
+      // });
+      // tx.executeSql('SELECT * FROM baby_subitem', [], (_, { rows }) => {
+      //   const result = rows._array;
+      //   console.log(result);
+      // });
+      // tx.executeSql('SELECT * FROM baby_subitemcount', [], (_, { rows }) => {
+      //   const result = rows._array;
+      //   console.log(result);
+      // });
     });
   }, []);
 
