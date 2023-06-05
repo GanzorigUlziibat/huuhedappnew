@@ -1,4 +1,4 @@
-import React, { useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -21,12 +21,13 @@ import * as SQLite from 'expo-sqlite';
 export default function Tabs() {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
-  const [flatListItems, setFlatListItems] = useState([]);
-  // const [subListItems, setSubListItems] = useState([]);
-
+  // const [flatListItems, setFlatListItems] = useState([]);
+  const [subListItems, setSubListItems] = useState([]);
+  const [subListHuns, setSubListHuns] = useState([]);
+  const db = SQLite.openDatabase('babyDatabase.db');
   useEffect(() => {
     // Open the database connection
-    const db = SQLite.openDatabase('babyDatabase.db');
+
 
     // Create a table baby_cat
     db.transaction(tx => {
@@ -98,14 +99,14 @@ export default function Tabs() {
     // Select query
     db.transaction((tx) => {
       try {
-        tx.executeSql('SELECT sub_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
           const result = rows._array;
-          console.log(result);
+          setSubListItems(result);
         });
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-       // tx.executeSql('SELECT * FROM baby_sub', [], (_, { rows }) => {
+      // tx.executeSql('SELECT * FROM baby_sub', [], (_, { rows }) => {
       //   const result = rows._array;
       //   console.log(result);
       // });
@@ -118,13 +119,80 @@ export default function Tabs() {
       //   console.log(result);
       // });
     });
+
+    //Huns
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListHuns(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+
+    });
   }, []);
+
+  const hunstablist = () => {
+    const tabbody = [];
+    console.log(subListHuns);
+    for (i = 0; i < subListHuns.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview1}>
+          <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
+          {/* <Text style={styles.postertext}>Ногоо</Text> */}
+          <Text style={styles.postertext}>{subListHuns[i].sub_name}</Text>
+        </View>
+      </Pressable>);
+    }
+
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+      <View style={styles.subview1}>
+        <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
+        <Text style={styles.postertext}>Ногоо</Text>
+      </View>
+    </Pressable>
+    
+    <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/posters/poster8.png')}></Image>
+          <Text style={styles.postertext}>Жимс</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/posters/poster9.png')}></Image>
+          <Text style={styles.postertext}>Хоол</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/posters/poster10.png')}></Image>
+          <Text style={styles.postertext}>Уух зүйлс</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/posters/poster11.png')}></Image>
+          <Text style={styles.postertext}>Амттан</Text>
+        </View>
+      </Pressable> */}
+      </View>)
+  }
 
   const FirstRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Амьтан</Text>
-      </View>
+      {subListItems.map(cat => (
+        <View style={styles.thtab} key={cat.cat_id}>
+          <Text style={styles.thtext}>{cat.cat_name}</Text>
+          {/* <Text style={styles.thtext}>Амьтан</Text> */}
+        </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
@@ -174,38 +242,9 @@ export default function Tabs() {
         <Text style={styles.thtext}>Хүнс</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.iv}>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
-              <Text style={styles.postertext}>Ногоо</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster8.png')}></Image>
-              <Text style={styles.postertext}>Жимс</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster9.png')}></Image>
-              <Text style={styles.postertext}>Хоол</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster10.png')}></Image>
-              <Text style={styles.postertext}>Уух зүйлс</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/posters/poster11.png')}></Image>
-              <Text style={styles.postertext}>Амттан</Text>
-            </View>
-          </Pressable>
-        </View>
+
+        {hunstablist()}
+
       </ScrollView>
     </View>
   );
@@ -533,7 +572,7 @@ export default function Tabs() {
       scrollEnabled={true}
     />
   );
-  return(
+  return (
     <SafeAreaView style={styles.container}>
       <TabView
         navigationState={{ index, routes }}
@@ -542,8 +581,8 @@ export default function Tabs() {
         renderTabBar={renderTabBar}
         initialLayout={{ width: layout.width }}
       />
-      
-      
+
+
     </SafeAreaView>
   );
 }

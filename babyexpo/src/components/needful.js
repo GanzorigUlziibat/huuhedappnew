@@ -1,0 +1,1 @@
+export const need = [{sid:0, sub_sound:"sub1.mp3", sub_image:"sub1.png"},{sid:1, sub_sound:"sub1.mp3", sub_image:"sub1.png"}]
