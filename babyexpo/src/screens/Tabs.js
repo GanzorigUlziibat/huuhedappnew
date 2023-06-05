@@ -139,7 +139,7 @@ export default function Tabs() {
     console.log(subListHuns);
     for (i = 0; i < subListHuns.length; i++) {
       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview1}>
+        <View style={styles.subview}>
           <Image style={styles.postericon} source={require('../images/posters/poster7.png')}></Image>
           {/* <Text style={styles.postertext}>Ногоо</Text> */}
           <Text style={styles.postertext}>{subListHuns[i].sub_name}</Text>
@@ -187,12 +187,9 @@ export default function Tabs() {
 
   const FirstRoute = () => (
     <View style={styles.tabcontainer}>
-      {subListItems.map(cat => (
-        <View style={styles.thtab} key={cat.cat_id}>
-          <Text style={styles.thtext}>{cat.cat_name}</Text>
-          {/* <Text style={styles.thtext}>Амьтан</Text> */}
+        <View style={styles.thtab}>
+          <Text style={styles.thtext}>Амьтан</Text>
         </View>
-      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
@@ -242,9 +239,7 @@ export default function Tabs() {
         <Text style={styles.thtext}>Хүнс</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-
         {hunstablist()}
-
       </ScrollView>
     </View>
   );
