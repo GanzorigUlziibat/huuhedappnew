@@ -16,7 +16,7 @@ import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful'
 export default function Delgerengui({ navigation }) {
   const db = SQLite.openDatabase('babyDatabase.db');
-  const [subListItems, setSubListItems] = useState([]);
+
   const [subListamitad, setSubListamitad] = useState([]);
   useEffect(() => {
     // Select query
@@ -32,7 +32,7 @@ export default function Delgerengui({ navigation }) {
       //amitad
       db.transaction((tx) => {
         try {
-          tx.executeSql('SELECT * FROM baby_subitem WHERE sid= 1', [], (_, { rows }) => {
+          tx.executeSql('SELECT * FROM baby_sub WHERE cid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
             const result = rows._array;
             setSubListamitad(result);
           });
@@ -49,8 +49,9 @@ export default function Delgerengui({ navigation }) {
         <View>
           <Image
             style={styles.i}
-            source={needful.sub['sub' + subListamitad[i].sid].image}
+            source={needful.cat['cat' + subListamitad[i].sid].image}
           ></Image>
+          <Text>{subListAmitan[i].item_name}</Text>
         </View>
       </View>
     }
