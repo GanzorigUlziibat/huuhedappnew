@@ -51,7 +51,7 @@ export default function Delgerengui({ navigation }) {
             style={styles.i}
             source={needful.cat['cat' + subListamitad[i].sid].image}
           ></Image>
-          <Text>{subListAmitan[i].item_name}</Text>
+          {/* <Text>{subListAmitan[i].item_name}</Text> */}
         </View>
       </View>
     }
