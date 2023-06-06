@@ -15,15 +15,14 @@ import {
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
-// import useInsert from "../hooks/useInsert";
-// import useSelect from "../hooks/useSelect";
-
-export default function Tabs() {
+import needful from '../components/needful'
+export default function Tabs({props}) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   // const [flatListItems, setFlatListItems] = useState([]);
   const [subListItems, setSubListItems] = useState([]);
   const [subListHuns, setSubListHuns] = useState([]);
+  const [subListAmitan, setSubListAmitan] = useState([]);
   const db = SQLite.openDatabase('babyDatabase.db');
   useEffect(() => {
     // Open the database connection
@@ -132,21 +131,85 @@ export default function Tabs() {
       }
 
     });
-  }, []);
+    //Amitan
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 1 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListAmitan(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
 
+    });
+  }, []);
+  const amitantablist = () => {
+    const tabbody = [];
+    console.log(subListAmitan);
+    for (i = 0; i < subListAmitan.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
+          {/* <Text style={styles.postertext}>Амьтад</Text> */}
+          <Text style={styles.postertext}>{subListAmitan[i].sub_name}</Text>
+        </View>
+      </Pressable>);
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+      <View style={styles.subview1}>
+        <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
+        <Text style={styles.postertext}>Амьтад</Text>
+      </View>
+    </Pressable>
+    <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/sub/sub8.png')}></Image>
+          <Text style={styles.postertext}>Амьтны үр төл</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/sub/sub9.png')}></Image>
+          <Text style={styles.postertext}>Шувуу</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/sub/sub10.png')}></Image>
+          <Text style={styles.postertext}>Далайн амьтад</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
+          <Text style={styles.postertext}>Шавж</Text>
+        </View>
+      </Pressable>
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
+          <Text style={styles.postertext}>Үлэг гүрвэл</Text>
+        </View>
+      </Pressable> */}
+      </View>)
+  }
   const hunstablist = () => {
     const tabbody = [];
     console.log(subListHuns);
     for (i = 0; i < subListHuns.length; i++) {
       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListHuns[i].sid].image}></Image>
           {/* <Text style={styles.postertext}>Ногоо</Text> */}
           <Text style={styles.postertext}>{subListHuns[i].sub_name}</Text>
         </View>
       </Pressable>);
     }
-
     return (
       <View style={styles.iv}>
         {tabbody}
@@ -191,44 +254,7 @@ export default function Tabs() {
           <Text style={styles.thtext}>Амьтан</Text>
         </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.iv}>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
-              <Image style={styles.postericon} source={require('../images/sub/sub1.png')}></Image>
-              <Text style={styles.postertext}>Амьтад</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub4.png')}></Image>
-              <Text style={styles.postertext}>Амьтны үр төл</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub3.png')}></Image>
-              <Text style={styles.postertext}>Шувуу</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub6.png')}></Image>
-              <Text style={styles.postertext}>Далайн амьтад</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub44.png')}></Image>
-              <Text style={styles.postertext}>Шавж</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub33.png')}></Image>
-              <Text style={styles.postertext}>Үлэг гүрвэл</Text>
-            </View>
-          </Pressable>
-        </View>
+        {amitantablist()}
       </ScrollView>
     </View>
   );
