@@ -13,8 +13,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import * as SQLite from 'expo-sqlite';
+import needful from '../components/needful'
 export default function Delgerengui({ navigation }) {
   const db = SQLite.openDatabase('babyDatabase.db');
+  const [subListItems, setSubListItems] = useState([]);
   const [subListamitad, setSubListamitad] = useState([]);
   useEffect(() => {
     // Select query
@@ -30,7 +32,7 @@ export default function Delgerengui({ navigation }) {
       //amitad
       db.transaction((tx) => {
         try {
-          tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          tx.executeSql('SELECT * FROM baby_subitem WHERE sid= 1', [], (_, { rows }) => {
             const result = rows._array;
             setSubListamitad(result);
           });
@@ -41,7 +43,17 @@ export default function Delgerengui({ navigation }) {
     });
   });
   const amitadtablist = () => {
-    console.log(subListamitad);
+    // console.log();
+    for (i = 0; i < subListamitad.length; i++) {
+      <View style={styles.items}>
+        <View>
+          <Image
+            style={styles.i}
+            source={needful.sub['sub' + subListamitad[i].sid].image}
+          ></Image>
+        </View>
+      </View>
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -49,11 +61,12 @@ export default function Delgerengui({ navigation }) {
         <View style={styles.thead}>
           <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
           <Text style={styles.thtxt}>Амьтад</Text>
-          {amitadtablist()}
+          {/* {amitadtablist()} */}
         </View>
       </Pressable>
       <ScrollView>
-        <View style={styles.items}>
+        {amitadtablist()}
+        {/* <View style={styles.items}>
           <View>
             <Image
               style={styles.i}
@@ -73,7 +86,7 @@ export default function Delgerengui({ navigation }) {
               source={require("../images/pngtree.jpg")}
             ></Image>
           </View>
-        </View>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
   );
