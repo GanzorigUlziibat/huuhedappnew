@@ -9,39 +9,70 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-
-export default function Delgerengui({navigation}) {
+import * as SQLite from 'expo-sqlite';
+export default function Delgerengui({ navigation }) {
+  const db = SQLite.openDatabase('babyDatabase.db');
+  const [subListamitad, setSubListamitad] = useState([]);
+  useEffect(() => {
+    // Select query
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListItems(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      //amitad
+      db.transaction((tx) => {
+        try {
+          tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+            const result = rows._array;
+            setSubListamitad(result);
+          });
+        } catch (error) {
+          console.log('Error executing select query:', error);
+        }
+      });
+    });
+  });
+  const amitadtablist = () => {
+    console.log(subListamitad);
+  }
   return (
     <SafeAreaView style={styles.container}>
-    <Pressable onPress={() => navigation.goBack()}>
-      <View style={styles.thead}>
-        <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
-        <Text style={styles.thtxt}>Амьтад</Text>
-      </View>
+      <Pressable onPress={() => navigation.goBack()}>
+        <View style={styles.thead}>
+          <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
+          <Text style={styles.thtxt}>Амьтад</Text>
+          {amitadtablist()}
+        </View>
       </Pressable>
       <ScrollView>
-      <View style={styles.items}>
-        <View>
-          <Image
-            style={styles.i}
-            source={require("../images/pngtree.jpg")}
-          ></Image>
-        </View>
-        <View>
-          <Image
-            style={styles.i}
-            source={require("../images/pngtree.jpg")}
-          ></Image>
-        </View>
+        <View style={styles.items}>
+          <View>
+            <Image
+              style={styles.i}
+              source={require("../images/pngtree.jpg")}
+            ></Image>
+          </View>
+          <View>
+            <Image
+              style={styles.i}
+              source={require("../images/pngtree.jpg")}
+            ></Image>
+          </View>
 
-        <View>
-          <Image
-            style={styles.i}
-            source={require("../images/pngtree.jpg")}
-          ></Image>
-        </View>
+          <View>
+            <Image
+              style={styles.i}
+              source={require("../images/pngtree.jpg")}
+            ></Image>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
