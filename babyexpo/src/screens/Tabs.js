@@ -20,13 +20,27 @@ export default function Tabs({props}) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   // const [flatListItems, setFlatListItems] = useState([]);
-  const [subListItems, setSubListItems] = useState([]);
+  const [catListAmitan, setCatListAmitan] = useState([]);
+  const [catListHuns, setCatListHuns] = useState([]);
+  const [catListMinii, setCatListMinii] = useState([]);
+  const [catListGer, setCatListGer] = useState([]);
+  const [catListMashin, setCatListMashin] = useState([]);
+  const [catListUseg, setCatListUseg] = useState([]);
+  const [catListTime, setCatListTime] = useState([]);
+  const [catListFlag, setCatListFlag] = useState([]);
+
   const [subListHuns, setSubListHuns] = useState([]);
   const [subListAmitan, setSubListAmitan] = useState([]);
+  const [subListMinii, setSubListMinii] = useState([]);
+  const [subListGer, setSubListGer] = useState([]);
+  const [subListMashin, setSubListMashin] = useState([]);
+  const [subListUseg, setSubListUseg] = useState([]);
+  const [subListTime, setSubListTime] = useState([]);
+  const [subListFlag, setSubListFlag] = useState([]);
   const db = SQLite.openDatabase('babyDatabase.db');
-  useEffect(() => {
-    // Open the database connection
 
+
+  useEffect(() => {
 
     // Create a table baby_cat
     db.transaction(tx => {
@@ -94,29 +108,72 @@ export default function Tabs({props}) {
         console.log('Error inserting baby_subitemcount:', error);
       }
     });
-
-    // Select query
+    // Cat query
     db.transaction((tx) => {
       try {
-        tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=1 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
-          setSubListItems(result);
+          setCatListAmitan(result);
         });
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-      // tx.executeSql('SELECT * FROM baby_sub', [], (_, { rows }) => {
-      //   const result = rows._array;
-      //   console.log(result);
-      // });
-      // tx.executeSql('SELECT * FROM baby_subitem', [], (_, { rows }) => {
-      //   const result = rows._array;
-      //   console.log(result);
-      // });
-      // tx.executeSql('SELECT * FROM baby_subitemcount', [], (_, { rows }) => {
-      //   const result = rows._array;
-      //   console.log(result);
-      // });
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=2 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListHuns(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=3 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListMinii(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=4 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListGer(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=5 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListMashin(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=6 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListUseg(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=7 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListTime(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+      try {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=8 order by cat_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setCatListFlag(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
     });
 
     //Huns
@@ -143,10 +200,78 @@ export default function Tabs({props}) {
       }
 
     });
+    //Minii
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 3 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListMinii(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
+    //Ger
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 9 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListGer(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
+    //Mashin
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 4 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListMashin(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
+    //Useg
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 6 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListUseg(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
+    //Tsag agaar
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 8 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListTime(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
+    //Dalbaa
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 7 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListFlag(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
   }, []);
+
+
   const amitantablist = () => {
     const tabbody = [];
-    console.log(subListAmitan);
+    // console.log(subListAmitan);
     for (i = 0; i < subListAmitan.length; i++) {
       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
@@ -161,7 +286,7 @@ export default function Tabs({props}) {
         {tabbody}
         {/* 
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-      <View style={styles.subview1}>
+      <View style={styles.subview}>
         <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
         <Text style={styles.postertext}>Амьтад</Text>
       </View>
@@ -200,7 +325,7 @@ export default function Tabs({props}) {
   }
   const hunstablist = () => {
     const tabbody = [];
-    console.log(subListHuns);
+    // console.log(subListHuns);
     for (i = 0; i < subListHuns.length; i++) {
       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
         <View style={styles.subview}>
@@ -215,7 +340,7 @@ export default function Tabs({props}) {
         {tabbody}
         {/* 
       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-      <View style={styles.subview1}>
+      <View style={styles.subview}>
         <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
         <Text style={styles.postertext}>Ногоо</Text>
       </View>
@@ -247,37 +372,24 @@ export default function Tabs({props}) {
       </Pressable> */}
       </View>)
   }
-
-  const FirstRoute = () => (
-    <View style={styles.tabcontainer}>
-        <View style={styles.thtab}>
-          <Text style={styles.thtext}>Амьтан</Text>
+  const miniitablist = () => {
+    const tabbody = [];
+    // console.log(subListMinii);
+    for (i = 0; i < subListMinii.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListMinii[i].sid].image}></Image>
+          {/* <Text style={styles.postertext}>Ногоо</Text> */}
+          <Text style={styles.postertext}>{subListMinii[i].sub_name}</Text>
         </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {amitantablist()}
-      </ScrollView>
-    </View>
-  );
-
-  const SecondRoute = () => (
-    <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Хүнс</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {hunstablist()}
-      </ScrollView>
-    </View>
-  );
-  const ThirdRoute = () => (
-    <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Миний</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.iv}>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
+      </Pressable>);
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
               <Image style={styles.postericon} source={require('../images/sub/sub10.png')}></Image>
               <Text style={styles.postertext}>Гэр бүл</Text>
             </View>
@@ -305,21 +417,27 @@ export default function Tabs({props}) {
               <Image style={styles.postericon} source={require('../images/sub/sub41.png')}></Image>
               <Text style={styles.postertext}>Хөгжмийн зэмсэг</Text>
             </View>
-          </Pressable>
+          </Pressable> */}
+      </View>)
+  }
+  const gertablist = () => {
+    const tabbody = [];
+    // console.log(subListGer);
+    for (i = 0; i < subListGer.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListGer[i].sid].image}></Image>
+          {/* <Text style={styles.postertext}>Миний өрөө</Text> */}
+          <Text style={styles.postertext}>{subListGer[i].sub_name}</Text>
         </View>
-      </ScrollView>
-    </View>
-  );
-
-  const FourthRoute = () => (
-    <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Гэр</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.iv}>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
+      </Pressable>);
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
               <Image style={styles.postericon} source={require('../images/sub/sub17.png')}></Image>
               <Text style={styles.postertext}>Миний өрөө</Text>
             </View>
@@ -341,20 +459,27 @@ export default function Tabs({props}) {
               <Image style={styles.postericon} source={require('../images/sub/sub20.png')}></Image>
               <Text style={styles.postertext}>Манай гэр</Text>
             </View>
-          </Pressable>
+          </Pressable> */}
+      </View>)
+  }
+  const mashintablist = () => {
+    const tabbody = [];
+    // console.log(subListMashin);
+    for (i = 0; i < subListMashin.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListMashin[i].sid].image}></Image>
+          {/* <Text style={styles.postertext}>Жижиг, дунд оврын</Text> */}
+          <Text style={styles.postertext}>{subListMashin[i].sub_name}</Text>
         </View>
-      </ScrollView>
-    </View>
-  );
-  const FifthRoute = () => (
-    <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.iv}>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
+      </Pressable>);
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
               <Image style={styles.postericon} source={require('../images/sub/sub21.png')}></Image>
               <Text style={styles.postertext}>Жижиг, дунд оврын</Text>
             </View>
@@ -376,21 +501,27 @@ export default function Tabs({props}) {
               <Image style={styles.postericon} source={require('../images/sub/sub24.png')}></Image>
               <Text style={styles.postertext}>Машины брэнд, лого</Text>
             </View>
-          </Pressable>
+          </Pressable> */}
+      </View>)
+  }
+  const usegtablist = () => {
+    const tabbody = [];
+    // console.log(subListUseg);
+    for (i = 0; i < subListUseg.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListUseg[i].sid].image}></Image>
+          {/* <Text style={styles.postertext}>Өнгө</Text> */}
+          <Text style={styles.postertext}>{subListUseg[i].sub_name}</Text>
         </View>
-      </ScrollView>
-    </View>
-  );
-
-  const SixthRoute = () => (
-    <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.iv}>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
+      </Pressable>);
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
               <Image style={styles.postericon} source={require('../images/sub/sub25.png')}></Image>
               <Text style={styles.postertext}>Өнгө</Text>
             </View>
@@ -424,8 +555,126 @@ export default function Tabs({props}) {
               <Image style={styles.postericon} source={require('../images/sub/sub30.png')}></Image>
               <Text style={styles.postertext}>Англи үсэг</Text>
             </View>
-          </Pressable>
+          </Pressable> */}
+      </View>)
+  }
+  const weathertablist = () => {
+    const tabbody = [];
+    // console.log(subListTime);
+    for (i = 0; i < subListTime.length; i++) {
+      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        <View style={styles.subview}>
+          <Image style={styles.postericon} source={needful.sub['sub' + subListTime[i].sid].image}></Image>
+          {/* <Text style={styles.postertext}>Цаг агаар</Text> */}
+          <Text style={styles.postertext}>{subListTime[i].sub_name}</Text>
         </View>
+      </Pressable>);
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+        {/* 
+      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={require('../images/sub/sub25.png')}></Image>
+              <Text style={styles.postertext}>Өнгө</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={require('../images/sub/sub26.png')}></Image>
+              <Text style={styles.postertext}>Дүрс</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={require('../images/sub/sub27.png')}></Image>
+              <Text style={styles.postertext}>Тоо</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={require('../images/sub/sub28.png')}></Image>
+              <Text style={styles.postertext}>Улаан цэг</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={require('../images/sub/sub29.png')}></Image>
+              <Text style={styles.postertext}>Үсэг</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={require('../images/sub/sub30.png')}></Image>
+              <Text style={styles.postertext}>Англи үсэг</Text>
+            </View>
+          </Pressable> */}
+      </View>)
+  }
+
+
+  const FirstRoute = () => (
+    <View style={styles.tabcontainer}>
+        <View style={styles.thtab}>
+          <Text style={styles.thtext}>Амьтан</Text>
+        </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {amitantablist()}
+      </ScrollView>
+    </View>
+  );
+
+  const SecondRoute = () => (
+    <View style={styles.tabcontainer}>
+      <View style={styles.thtab}>
+        <Text style={styles.thtext}>Хүнс</Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {hunstablist()}
+      </ScrollView>
+    </View>
+  );
+
+  const ThirdRoute = () => (
+    <View style={styles.tabcontainer}>
+      <View style={styles.thtab}>
+        <Text style={styles.thtext}>Миний</Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {miniitablist()}
+      </ScrollView>
+    </View>
+  );
+
+  const FourthRoute = () => (
+    <View style={styles.tabcontainer}>
+      <View style={styles.thtab}>
+        <Text style={styles.thtext}>Гэр</Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      {gertablist()}
+      </ScrollView>
+    </View>
+  );
+  const FifthRoute = () => (
+    <View style={styles.tabcontainer}>
+      <View style={styles.thtab}>
+        <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {mashintablist()}
+      </ScrollView>
+    </View>
+  );
+
+  const SixthRoute = () => (
+    <View style={styles.tabcontainer}>
+      <View style={styles.thtab}>
+        <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text>
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      {usegtablist()}
       </ScrollView>
     </View>
   );
@@ -437,7 +686,7 @@ export default function Tabs({props}) {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
+            <View style={styles.subview}>
               <Image style={styles.postericon} source={require('../images/sub/sub31.png')}></Image>
               <Text style={styles.postertext}>Цаг агаар</Text>
             </View>
@@ -466,7 +715,7 @@ export default function Tabs({props}) {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.iv}>
           <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview1}>
+            <View style={styles.subview}>
               <Image style={styles.postericon} source={require('../images/sub/sub34.png')}></Image>
               <Text style={styles.postertext}>Ази</Text>
             </View>
@@ -620,6 +869,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#5D3FD3",
     height: 55,
     marginTop: 0.8,
+    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
     borderBottomLeftRadius: 15,
@@ -637,23 +887,6 @@ const styles = StyleSheet.create({
   subview: {
     margin: 15,
     marginTop: 2,
-    height: 70,
-    borderRadius: 20,
-    flexDirection: "row",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 10,
-    backgroundColor: "white",
-    alignItems: "center",
-  },
-  subview1: {
-    margin: 15,
-    marginTop: 25,
     height: 70,
     borderRadius: 20,
     flexDirection: "row",
