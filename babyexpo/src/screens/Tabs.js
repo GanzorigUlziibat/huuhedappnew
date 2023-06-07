@@ -737,12 +737,11 @@ export default function Tabs({ props }) {
 
   const FirstRoute = () => (
     <View style={styles.tabcontainer}>
-      {showAmitanTabs()
-      }
+      {showAmitanTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {amitantablist()}
       </ScrollView>
-    </View >
+    </View>
   );
 
   const SecondRoute = () => (
