@@ -50,12 +50,12 @@ export default function Delgerengui({ navigation }) {
     for (i = 0; i < subListamitad.length; i++) {
       // console.log('item' + subListamitad[i].item_id);
       tabbody.push(<View style={styles.items}>
-        <View>
+        <View  >
           <Image
             style={styles.i}
             source={needful.subitem['item' + (subListamitad[i].item_id + 1)].image}
           ></Image>
-          <Text>{subListamitad[i].item_name}</Text>
+          {/* <Text>{subListamitad[i].item_name}</Text> */}
         </View>
       </View>)
     }
@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
   },
   items: {
     flexDirection: "row",
-    justifyContent: "center",
     flexWrap: "wrap",
     margin: 10,
+
   },
   i: {
     width: 120,
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     margin: 5,
     borderColor: "purple",
+    // resizeMode: "stretch",
   },
 
 });
