@@ -19,7 +19,6 @@ import needful from '../components/needful'
 export default function Tabs() {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
-  // const [flatListItems, setFlatListItems] = useState([]);
   const [catListAmitan, setCatListAmitan] = useState([]);
   const [catListHuns, setCatListHuns] = useState([]);
   const [catListMinii, setCatListMinii] = useState([]);
@@ -108,6 +107,7 @@ export default function Tabs() {
         console.log('Error inserting baby_subitemcount:', error);
       }
     });
+
     // Cat query
     db.transaction((tx) => {
       try {
@@ -176,20 +176,9 @@ export default function Tabs() {
       }
     });
 
-    //Huns
+    //Sub query
     db.transaction((tx) => {
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListHuns(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-
-    });
-    //Amitan
-    db.transaction((tx) => {
+        //Huns
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 1 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -198,10 +187,16 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-
-    });
-    //Minii
-    db.transaction((tx) => {
+          //Amitan
+      try {
+        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubListHuns(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }    
+      //Minii
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 3 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -210,9 +205,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-    });
-    //Ger
-    db.transaction((tx) => {
+          //Ger
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 9 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -221,9 +214,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-    });
-    //Mashin
-    db.transaction((tx) => {
+          //Mashin
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 4 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -232,9 +223,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-    });
-    //Useg
-    db.transaction((tx) => {
+          //Useg
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 6 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -243,9 +232,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-    });
-    //Tsag agaar
-    db.transaction((tx) => {
+          //Tsag agaar
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 8 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -254,9 +241,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-    });
-    //Dalbaa
-    db.transaction((tx) => {
+          //Dalbaa
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 7 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -266,8 +251,10 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
     });
+
   }, []);
 
+  // show sublists
 
   const amitantablist = () => {
     const tabbody = [];
@@ -650,14 +637,107 @@ export default function Tabs() {
   }
 
 
-  const FirstRoute = () => (
-    <View style={styles.tabcontainer}>
-      {catListAmitan.map((cat) => (
-        <View style={styles.thtab} key={cat.cat_id}>
-          <Text style={styles.thtext}>{cat.cat_name}</Text>
+  //show cats
+  const showAmitanTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListAmitan.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}        >
+          <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
           {/* <Text style={styles.thtext}>Амьтан</Text> */}
         </View>
-      ))}
+      )
+    }
+    return tabsCat;
+  }
+  const showHunsTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListHuns.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListHuns[i].cid}        >
+          <Text style={styles.thtext}>{catListHuns[i].cat_name}</Text>
+          {/* <Text style={styles.thtext}>Хүнс</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+  const showMiniiTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListMinii.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListMinii[i].cid}        >
+          <Text style={styles.thtext}>{catListMinii[i].cat_name}</Text>
+        {/* <Text style={styles.thtext}>Миний</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+  const showGerTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListGer.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListGer[i].cid}        >
+          <Text style={styles.thtext}>{catListGer[i].cat_name}</Text>
+        {/* <Text style={styles.thtext}>Гэр</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+  const showMashinTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListMashin.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListMashin[i].cid}        >
+          <Text style={styles.thtext}>{catListMashin[i].cat_name}</Text>
+        {/* <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+  const showUsegTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListUseg.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListUseg[i].cid}        >
+          <Text style={styles.thtext}>{catListUseg[i].cat_name}</Text>
+        {/* <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+  const showTimeTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListTime.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListTime[i].cid}        >
+          <Text style={styles.thtext}>{catListTime[i].cat_name}</Text>
+        {/* <Text style={styles.thtext}>Цаг агаар, цаг</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+  const showFlagTabs = () => {
+    let tabsCat = [];
+    for (let i = 0; i < catListFlag.length; i++) {
+      tabsCat.push(
+        <View style={styles.thtab} key={'cat' + catListFlag[i].cid}        >
+          <Text style={styles.thtext}>{catListFlag[i].cat_name}</Text>
+        {/* <Text style={styles.thtext}>Далбаа</Text> */}
+        </View>
+      )
+    }
+    return tabsCat;
+  }
+
+  const FirstRoute = () => (
+    <View style={styles.tabcontainer}>
+      {showAmitanTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {amitantablist()}
       </ScrollView>
@@ -666,12 +746,7 @@ export default function Tabs() {
 
   const SecondRoute = () => (
     <View style={styles.tabcontainer}>
-    {catListHuns.map((cat) => (
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Хүнс</Text> */}
-      </View>
-      ))}
+    {showHunsTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {hunstablist()}
       </ScrollView>
@@ -680,12 +755,7 @@ export default function Tabs() {
 
   const ThirdRoute = () => (
     <View style={styles.tabcontainer}>
-    {catListMinii.map((cat) =>(
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Миний</Text> */}
-      </View>
-      ))}
+    {showMiniiTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {miniitablist()}
       </ScrollView>
@@ -694,12 +764,7 @@ export default function Tabs() {
 
   const FourthRoute = () => (
     <View style={styles.tabcontainer}>
-    {catListGer.map((cat) => (
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Гэр</Text> */}
-      </View>
-      ))}
+    {showGerTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {gertablist()}
       </ScrollView>
@@ -707,12 +772,7 @@ export default function Tabs() {
   );
   const FifthRoute = () => (
     <View style={styles.tabcontainer}>
-      {catListMashin.map((cat) => (
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text> */}
-      </View>
-      ))}
+      {showMashinTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {mashintablist()}
       </ScrollView>
@@ -721,12 +781,7 @@ export default function Tabs() {
 
   const SixthRoute = () => (
     <View style={styles.tabcontainer}>
-      {catListUseg.map((cat) => (
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text> */}
-      </View>
-      ))}
+      {showUsegTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {usegtablist()}
       </ScrollView>
@@ -734,12 +789,7 @@ export default function Tabs() {
   );
   const SeventhRoute = () => (
     <View style={styles.tabcontainer}>
-      {catListTime.map((cat) => (
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Цаг агаар, цаг</Text> */}
-      </View>
-      ))}
+      {showTimeTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {weathertablist()}
       </ScrollView>
@@ -747,12 +797,7 @@ export default function Tabs() {
   );
   const EightthRoute = () => (
     <View style={styles.tabcontainer}>
-      {catListFlag.map((cat) => (
-      <View style={styles.thtab} key={cat.cat_id}>
-        <Text style={styles.thtext}>{cat.cat_name}</Text>
-        {/* <Text style={styles.thtext}>Далбаа</Text> */}
-      </View>
-      ))}
+      {showFlagTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {dalbaatablist()}
       </ScrollView>
@@ -855,8 +900,6 @@ export default function Tabs() {
         renderTabBar={renderTabBar}
         initialLayout={{ width: layout.width }}
       />
-
-
     </SafeAreaView>
   );
 }

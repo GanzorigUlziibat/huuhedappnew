@@ -24,7 +24,7 @@ export default function Delgerengui({ navigation }) {
       try {
         tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
           const result = rows._array;
-          setSubListamitad(result);
+          setSubListItems(result);
         });
       } catch (error) {
         console.log('Error executing select query:', error);
