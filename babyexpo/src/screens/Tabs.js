@@ -16,7 +16,7 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful'
-export default function Tabs() {
+export default function Tabs({ props }) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   const [catListAmitan, setCatListAmitan] = useState([]);
@@ -178,7 +178,7 @@ export default function Tabs() {
 
     //Sub query
     db.transaction((tx) => {
-        //Huns
+      //Huns
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 1 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -187,7 +187,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-          //Amitan
+      //Amitan
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -195,7 +195,7 @@ export default function Tabs() {
         });
       } catch (error) {
         console.log('Error executing select query:', error);
-      }    
+      }
       //Minii
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 3 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
@@ -205,7 +205,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-          //Ger
+      //Ger
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 9 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -214,7 +214,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-          //Mashin
+      //Mashin
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 4 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -223,7 +223,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-          //Useg
+      //Useg
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 6 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -232,7 +232,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-          //Tsag agaar
+      //Tsag agaar
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 8 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -241,7 +241,7 @@ export default function Tabs() {
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-          //Dalbaa
+      //Dalbaa
       try {
         tx.executeSql('SELECT * FROM baby_sub WHERE cid = 7 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
           const result = rows._array;
@@ -668,7 +668,7 @@ export default function Tabs() {
       tabsCat.push(
         <View style={styles.thtab} key={'cat' + catListMinii[i].cid}        >
           <Text style={styles.thtext}>{catListMinii[i].cat_name}</Text>
-        {/* <Text style={styles.thtext}>Миний</Text> */}
+          {/* <Text style={styles.thtext}>Миний</Text> */}
         </View>
       )
     }
@@ -680,7 +680,7 @@ export default function Tabs() {
       tabsCat.push(
         <View style={styles.thtab} key={'cat' + catListGer[i].cid}        >
           <Text style={styles.thtext}>{catListGer[i].cat_name}</Text>
-        {/* <Text style={styles.thtext}>Гэр</Text> */}
+          {/* <Text style={styles.thtext}>Гэр</Text> */}
         </View>
       )
     }
@@ -692,7 +692,7 @@ export default function Tabs() {
       tabsCat.push(
         <View style={styles.thtab} key={'cat' + catListMashin[i].cid}        >
           <Text style={styles.thtext}>{catListMashin[i].cat_name}</Text>
-        {/* <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text> */}
+          {/* <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text> */}
         </View>
       )
     }
@@ -704,7 +704,7 @@ export default function Tabs() {
       tabsCat.push(
         <View style={styles.thtab} key={'cat' + catListUseg[i].cid}        >
           <Text style={styles.thtext}>{catListUseg[i].cat_name}</Text>
-        {/* <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text> */}
+          {/* <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text> */}
         </View>
       )
     }
@@ -716,7 +716,7 @@ export default function Tabs() {
       tabsCat.push(
         <View style={styles.thtab} key={'cat' + catListTime[i].cid}        >
           <Text style={styles.thtext}>{catListTime[i].cat_name}</Text>
-        {/* <Text style={styles.thtext}>Цаг агаар, цаг</Text> */}
+          {/* <Text style={styles.thtext}>Цаг агаар, цаг</Text> */}
         </View>
       )
     }
@@ -728,7 +728,7 @@ export default function Tabs() {
       tabsCat.push(
         <View style={styles.thtab} key={'cat' + catListFlag[i].cid}        >
           <Text style={styles.thtext}>{catListFlag[i].cat_name}</Text>
-        {/* <Text style={styles.thtext}>Далбаа</Text> */}
+          {/* <Text style={styles.thtext}>Далбаа</Text> */}
         </View>
       )
     }
@@ -737,16 +737,17 @@ export default function Tabs() {
 
   const FirstRoute = () => (
     <View style={styles.tabcontainer}>
-      {showAmitanTabs()}
+      {showAmitanTabs()
+      }
       <ScrollView showsVerticalScrollIndicator={false}>
         {amitantablist()}
       </ScrollView>
-    </View>
+    </View >
   );
 
   const SecondRoute = () => (
     <View style={styles.tabcontainer}>
-    {showHunsTabs()}
+      {showHunsTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {hunstablist()}
       </ScrollView>
@@ -755,7 +756,7 @@ export default function Tabs() {
 
   const ThirdRoute = () => (
     <View style={styles.tabcontainer}>
-    {showMiniiTabs()}
+      {showMiniiTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {miniitablist()}
       </ScrollView>
@@ -764,7 +765,7 @@ export default function Tabs() {
 
   const FourthRoute = () => (
     <View style={styles.tabcontainer}>
-    {showGerTabs()}
+      {showGerTabs()}
       <ScrollView showsVerticalScrollIndicator={false}>
         {gertablist()}
       </ScrollView>

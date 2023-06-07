@@ -21,40 +21,45 @@ export default function Delgerengui({ navigation }) {
   useEffect(() => {
     // Select query
     db.transaction((tx) => {
-      try {
-        tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListItems(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
+      // try {
+      //   tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
+      //     const result = rows._array;
+      //     setSubListItems(result);
+      //   });
+      // } catch (error) {
+      //   console.log('Error executing select query:', error);
+      // }
       //amitad
       db.transaction((tx) => {
         try {
-          tx.executeSql('SELECT * FROM baby_sub WHERE cid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
+          tx.executeSql('SELECT * FROM baby_subitem WHERE sid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
             const result = rows._array;
+
             setSubListamitad(result);
+            // console.log(result);
           });
         } catch (error) {
           console.log('Error executing select query:', error);
         }
       });
     });
-  });
+  }, []);
   const amitadtablist = () => {
-    // console.log();
+    // console.log(subListamitad);
+    const tabbody = [];
     for (i = 0; i < subListamitad.length; i++) {
-      <View style={styles.items}>
+      // console.log('item' + subListamitad[i].item_id);
+      tabbody.push(<View style={styles.items}>
         <View>
           <Image
             style={styles.i}
-            source={needful.cat['cat' + subListamitad[i].sid].image}
+            source={needful.subitem['item' + (subListamitad[i].item_id + 1)].image}
           ></Image>
-          {/* <Text>{subListAmitan[i].item_name}</Text> */}
+          <Text>{subListamitad[i].item_name}</Text>
         </View>
-      </View>
+      </View>)
     }
+    return tabbody;
   }
   return (
     <SafeAreaView style={styles.container}>
