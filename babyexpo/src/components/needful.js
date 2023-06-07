@@ -318,195 +318,195 @@ const need = {
       },
       item4: {
         sound: require('../sounds/subitem/item4.mp3'),
-        image: require('../images/subitem/item4.png'),
+        image: require('../images/subitem/item6.png'),
       },
       item5: {
         sound: require('../sounds/subitem/item5.mp3'),
-        image: require('../images/subitem/item5.png'),
+        image: require('../images/subitem/item15.png'),
       },
       item6: {
         sound: require('../sounds/subitem/item6.mp3'),
-        image: require('../images/subitem/item6.png'),
+        image: require('../images/subitem/item16.png'),
       },
       item7: {
         sound: require('../sounds/subitem/item7.mp3'),
-        image: require('../images/subitem/item7.png'),
+        image: require('../images/subitem/item45.png'),
       },
       item8: {
         sound: require('../sounds/subitem/item8.mp3'),
-        image: require('../images/subitem/item8.png'),
+        image: require('../images/subitem/item46.png'),
       },
       item9: {
         sound: require('../sounds/subitem/item9.mp3'),
-        image: require('../images/subitem/item9.png'),
+        image: require('../images/subitem/item19.png'),
       },
       item10: {
         sound: require('../sounds/subitem/item10.mp3'),
-        image: require('../images/subitem/item10.png'),
+        image: require('../images/subitem/item20.png'),
       },
       item11: {
         sound: require('../sounds/subitem/item11.mp3'),
-        image: require('../images/subitem/item11.png'),
+        image: require('../images/subitem/item624.png'),
       },
       item12: {
         sound: require('../sounds/subitem/item12.mp3'),
-        image: require('../images/subitem/item12.png'),
+        image: require('../images/subitem/item22.png'),
       },
       item13: {
         sound: require('../sounds/subitem/item13.mp3'),
-        image: require('../images/subitem/item13.png'),
+        image: require('../images/subitem/item23.png'),
       },
       item14: {
         sound: require('../sounds/subitem/item14.mp3'),
-        image: require('../images/subitem/item14.png'),
+        image: require('../images/subitem/item24.png'),
       },
       item15: {
         sound: require('../sounds/subitem/item15.mp3'),
-        image: require('../images/subitem/item15.png'),
+        image: require('../images/subitem/item25.png'),
       },
       item16: {
         sound: require('../sounds/subitem/item16.mp3'),
-        image: require('../images/subitem/item16.png'),
+        image: require('../images/subitem/item26.png'),
       },
       item17: {
         sound: require('../sounds/subitem/item17.mp3'),
-        image: require('../images/subitem/item17.png'),
+        image: require('../images/subitem/item1077.png'),
       },
       item18: {
         sound: require('../sounds/subitem/item18.mp3'),
-        image: require('../images/subitem/item18.png'),
+        image: require('../images/subitem/item28.png'),
       },
       item19: {
         sound: require('../sounds/subitem/item19.mp3'),
-        image: require('../images/subitem/item19.png'),
+        image: require('../images/subitem/item29.png'),
       },
       item20: {
         sound: require('../sounds/subitem/item20.mp3'),
-        image: require('../images/subitem/item20.png'),
+        image: require('../images/subitem/item30.png'),
       },
       item21: {
         sound: require('../sounds/subitem/item21.mp3'),
-        image: require('../images/subitem/item21.png'),
+        image: require('../images/subitem/item31.png'),
       },
       item22: {
         sound: require('../sounds/subitem/item22.mp3'),
-        image: require('../images/subitem/item22.png'),
+        image: require('../images/subitem/item32.png'),
       },
       item23: {
         sound: require('../sounds/subitem/item23.mp3'),
-        image: require('../images/subitem/item23.png'),
+        image: require('../images/subitem/item33.png'),
       },
       item24: {
         sound: require('../sounds/subitem/item24.mp3'),
-        image: require('../images/subitem/item24.png'),
+        image: require('../images/subitem/item34.png'),
       },
       item25: {
         sound: require('../sounds/subitem/item25.mp3'),
-        image: require('../images/subitem/item25.png'),
+        image: require('../images/subitem/item44.png'),
       },
       item26: {
         sound: require('../sounds/subitem/item26.mp3'),
-        image: require('../images/subitem/item26.png'),
+        image: require('../images/subitem/item35.png'),
       },
       item27: {
         sound: require('../sounds/subitem/item27.mp3'),
-        image: require('../images/subitem/item27.png'),
+        image: require('../images/subitem/item1080.png'),
       },
       item28: {
         sound: require('../sounds/subitem/item28.mp3'),
-        image: require('../images/subitem/item28.png'),
+        image: require('../images/subitem/item1081.png'),
       },
       item29: {
         sound: require('../sounds/subitem/item29.mp3'),
-        image: require('../images/subitem/item29.png'),
+        image: require('../images/subitem/item1082.png'),
       },
       item30: {
         sound: require('../sounds/subitem/item30.mp3'),
-        image: require('../images/subitem/item30.png'),
+        image: require('../images/subitem/item1083.png'),
       },
       item31: {
         sound: require('../sounds/subitem/item31.mp3'),
-        image: require('../images/subitem/item31.png'),
+        image: require('../images/subitem/item1084.png'),
       },
       item32: {
         sound: require('../sounds/subitem/item32.mp3'),
-        image: require('../images/subitem/item32.png'),
+        image: require('../images/subitem/item1085.png'),
       },
       item33: {
         sound: require('../sounds/subitem/item33.mp3'),
-        image: require('../images/subitem/item33.png'),
+        image: require('../images/subitem/item1086.png'),
       },
       item34: {
         sound: require('../sounds/subitem/item34.mp3'),
-        image: require('../images/subitem/item34.png'),
+        image: require('../images/subitem/item1087.png'),
       },
       item35: {
         sound: require('../sounds/subitem/item35.mp3'),
-        image: require('../images/subitem/item35.png'),
+        image: require('../images/subitem/item1088.png'),
       },
       item36: {
         sound: require('../sounds/subitem/item36.mp3'),
-        image: require('../images/subitem/item36.png'),
+        image: require('../images/subitem/item1089.png'),
       },
       item37: {
         sound: require('../sounds/subitem/item37.mp3'),
-        image: require('../images/subitem/item37.png'),
+        image: require('../images/subitem/item1090.png'),
       },
       item38: {
         sound: require('../sounds/subitem/item38.mp3'),
-        image: require('../images/subitem/item38.png'),
+        image: require('../images/subitem/item1091.png'),
       },
       item39: {
         sound: require('../sounds/subitem/item39.mp3'),
-        image: require('../images/subitem/item39.png'),
+        image: require('../images/subitem/item1092.png'),
       },
       item40: {
         sound: require('../sounds/subitem/item40.mp3'),
-        image: require('../images/subitem/item40.png'),
+        image: require('../images/subitem/item1081.png'),
       },
       item41: {
         sound: require('../sounds/subitem/item41.mp3'),
-        image: require('../images/subitem/item41.png'),
+        image: require('../images/subitem/item1093.png'),
       },
       item42: {
         sound: require('../sounds/subitem/item42.mp3'),
-        image: require('../images/subitem/item42.png'),
+        image: require('../images/subitem/item1094.png'),
       },
       item43: {
         sound: require('../sounds/subitem/item43.mp3'),
-        image: require('../images/subitem/item43.png'),
+        image: require('../images/subitem/item1095.png'),
       },
       item44: {
         sound: require('../sounds/subitem/item44.mp3'),
-        image: require('../images/subitem/item44.png'),
+        image: require('../images/subitem/item1096.png'),
       },
       item45: {
         sound: require('../sounds/subitem/item45.mp3'),
-        image: require('../images/subitem/item45.png'),
+        image: require('../images/subitem/item1097.png'),
       },
       item46: {
         sound: require('../sounds/subitem/item46.mp3'),
-        image: require('../images/subitem/item46.png'),
+        image: require('../images/subitem/item1098.png'),
       },
       item47: {
         sound: require('../sounds/subitem/item47.mp3'),
-        image: require('../images/subitem/item47.png'),
+        image: require('../images/subitem/item1099.png'),
       },
       item48: {
         sound: require('../sounds/subitem/item48.mp3'),
-        image: require('../images/subitem/item48.png'),
+        image: require('../images/subitem/item1100.png'),
       },
       item49: {
         sound: require('../sounds/subitem/item49.mp3'),
-        image: require('../images/subitem/item49.png'),
+        image: require('../images/subitem/item1101.png'),
       },
       item50: {
         sound: require('../sounds/subitem/item50.mp3'),
-        image: require('../images/subitem/item50.png'),
+        image: require('../images/subitem/item1102.png'),
       },
       item51: {
         sound: require('../sounds/subitem/item51.mp3'),
-        image: require('../images/subitem/item51.png'),
+        image: require('../images/subitem/item1103.png'),
       },
   
       item52: {
