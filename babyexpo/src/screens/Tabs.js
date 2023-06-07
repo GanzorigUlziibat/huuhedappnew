@@ -16,7 +16,7 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful'
-export default function Tabs({props}) {
+export default function Tabs() {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   // const [flatListItems, setFlatListItems] = useState([]);
@@ -135,7 +135,7 @@ export default function Tabs({props}) {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=4 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=9 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListGer(result);
         });
@@ -143,7 +143,7 @@ export default function Tabs({props}) {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=5 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=4 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListMashin(result);
         });
@@ -159,7 +159,7 @@ export default function Tabs({props}) {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=7 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=8 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListTime(result);
         });
@@ -167,7 +167,7 @@ export default function Tabs({props}) {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=8 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=7 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListFlag(result);
         });
@@ -652,9 +652,12 @@ export default function Tabs({props}) {
 
   const FirstRoute = () => (
     <View style={styles.tabcontainer}>
-        <View style={styles.thtab}>
-          <Text style={styles.thtext}>Амьтан</Text>
+      {catListAmitan.map((cat) => (
+        <View style={styles.thtab} key={cat.cat_id}>
+          <Text style={styles.thtext}>{cat.cat_name}</Text>
+          {/* <Text style={styles.thtext}>Амьтан</Text> */}
         </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         {amitantablist()}
       </ScrollView>
@@ -663,9 +666,12 @@ export default function Tabs({props}) {
 
   const SecondRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Хүнс</Text>
+    {catListHuns.map((cat) => (
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Хүнс</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         {hunstablist()}
       </ScrollView>
@@ -674,9 +680,12 @@ export default function Tabs({props}) {
 
   const ThirdRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Миний</Text>
+    {catListMinii.map((cat) =>(
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Миний</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         {miniitablist()}
       </ScrollView>
@@ -685,19 +694,25 @@ export default function Tabs({props}) {
 
   const FourthRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Гэр</Text>
+    {catListGer.map((cat) => (
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Гэр</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
-      {gertablist()}
+        {gertablist()}
       </ScrollView>
     </View>
   );
   const FifthRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text>
+      {catListMashin.map((cat) => (
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         {mashintablist()}
       </ScrollView>
@@ -706,19 +721,25 @@ export default function Tabs({props}) {
 
   const SixthRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text>
+      {catListUseg.map((cat) => (
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
-      {usegtablist()}
+        {usegtablist()}
       </ScrollView>
     </View>
   );
   const SeventhRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Цаг агаар, цаг</Text>
+      {catListTime.map((cat) => (
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Цаг агаар, цаг</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         {weathertablist()}
       </ScrollView>
@@ -726,9 +747,12 @@ export default function Tabs({props}) {
   );
   const EightthRoute = () => (
     <View style={styles.tabcontainer}>
-      <View style={styles.thtab}>
-        <Text style={styles.thtext}>Далбаа</Text>
+      {catListFlag.map((cat) => (
+      <View style={styles.thtab} key={cat.cat_id}>
+        <Text style={styles.thtext}>{cat.cat_name}</Text>
+        {/* <Text style={styles.thtext}>Далбаа</Text> */}
       </View>
+      ))}
       <ScrollView showsVerticalScrollIndicator={false}>
         {dalbaatablist()}
       </ScrollView>
