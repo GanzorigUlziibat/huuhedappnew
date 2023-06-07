@@ -111,7 +111,7 @@ export default function Tabs() {
     // Cat query
     db.transaction((tx) => {
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=1 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=1 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListAmitan(result);
         });
@@ -119,7 +119,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=2 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=2 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListHuns(result);
         });
@@ -127,7 +127,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=3 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=3 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListMinii(result);
         });
@@ -135,7 +135,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=9 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=9 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListGer(result);
         });
@@ -143,7 +143,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=4 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=4 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListMashin(result);
         });
@@ -151,7 +151,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=6 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=6 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListUseg(result);
         });
@@ -159,7 +159,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=8 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=8 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListTime(result);
         });
@@ -167,7 +167,7 @@ export default function Tabs() {
         console.log('Error executing select query:', error);
       }
       try {
-        tx.executeSql('SELECT cat_name from baby_cat where baby_cat.active=1 and cid=7 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=7 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListFlag(result);
         });
