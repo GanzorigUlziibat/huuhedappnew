@@ -18,6 +18,7 @@ export default function Delgerengui({ navigation }) {
   const db = SQLite.openDatabase('babyDatabase.db');
 
   const [subListamitad, setSubListamitad] = useState([]);
+  const [subListamitadvr, setSubListamitadvr] = useState([]);
   useEffect(() => {
     // Select query
     db.transaction((tx) => {
@@ -30,6 +31,18 @@ export default function Delgerengui({ navigation }) {
       //   console.log('Error executing select query:', error);
       // }
       //amitad
+      db.transaction((tx) => {
+        try {
+          tx.executeSql('SELECT * FROM baby_subitem WHERE sid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
+            const result = rows._array;
+
+            setSubListamitad(result);
+            // console.log(result);
+          });
+        } catch (error) {
+          console.log('Error executing select query:', error);
+        }
+      });
       db.transaction((tx) => {
         try {
           tx.executeSql('SELECT * FROM baby_subitem WHERE sid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
