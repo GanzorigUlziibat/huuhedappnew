@@ -12,6 +12,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import { Audio } from 'expo-av';
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
@@ -942,9 +943,10 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 10,
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+
+    elevation: 11,
     backgroundColor: "white",
     alignItems: "center",
   },
