@@ -851,15 +851,15 @@ export default function Tabs({ props }) {
   );
 
   const renderScene = SceneMap({
-    1: FirstRoute,
-    2: SecondRoute,
-    3: ThirdRoute,
-    4: FourthRoute,
-    5: FifthRoute,
-    6: SixthRoute,
-    7: SeventhRoute,
-    8: EightthRoute,
-    9: NinethRoute,
+    "1": FirstRoute,
+    "2": SecondRoute,
+    "3": ThirdRoute,
+    "4": FourthRoute,
+    "5": FifthRoute,
+    "6": SixthRoute,
+    "7": SeventhRoute,
+    "8": EightthRoute,
+    "9": NinethRoute,
   });
 
   const [index, setIndex] = React.useState(0);
