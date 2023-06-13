@@ -22,27 +22,7 @@ export default function Delgerengui({ navigation }) {
   useEffect(() => {
     // Select query
     db.transaction((tx) => {
-      // try {
-      //   tx.executeSql('SELECT cat_name from baby_cat inner join baby_sub on baby_cat.cid = baby_sub.cid where baby_cat.active=1 and baby_sub.active=1 order by baby_cat.cat_id, baby_sub.sub_id', [], (_, { rows }) => {
-      //     const result = rows._array;
-      //     setSubListItems(result);
-      //   });
-      // } catch (error) {
-      //   console.log('Error executing select query:', error);
-      // }
       //amitad
-      db.transaction((tx) => {
-        try {
-          tx.executeSql('SELECT * FROM baby_subitem WHERE sid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
-            const result = rows._array;
-
-            setSubListamitad(result);
-            // console.log(result);
-          });
-        } catch (error) {
-          console.log('Error executing select query:', error);
-        }
-      });
       db.transaction((tx) => {
         try {
           tx.executeSql('SELECT * FROM baby_subitem WHERE sid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {

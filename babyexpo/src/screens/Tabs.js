@@ -43,6 +43,8 @@ export default function Tabs({ props }) {
 
   useEffect(() => {
 
+    // alert123);
+
     // Create a table baby_cat
     db.transaction(tx => {
       try {
@@ -110,150 +112,39 @@ export default function Tabs({ props }) {
       }
     });
 
+
+
+  }, []);
+
+  useEffect(() => {
+    // alert(78912345);
     // Cat query
     db.transaction((tx) => {
       try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=1 order by cat_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 order by cat_id', [], (_, { rows }) => {
           const result = rows._array;
           setCatListAmitan(result);
         });
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=2 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListHuns(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=3 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListMinii(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=9 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListGer(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=4 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListMashin(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=6 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListUseg(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=8 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListTime(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 and cid=7 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListFlag(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
+
     });
 
     //Sub query
     db.transaction((tx) => {
-      //Huns
+
+      //Amitan
       try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 1 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
+        tx.executeSql('SELECT * FROM baby_sub WHERE active = 1 ORDER BY cid, sub_id', [], (_, { rows }) => {
           const result = rows._array;
           setSubListAmitan(result);
         });
       } catch (error) {
         console.log('Error executing select query:', error);
       }
-      //Amitan
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 2 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListHuns(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      //Minii
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 3 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListMinii(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      //Ger
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 9 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListGer(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      //Mashin
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 4 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListMashin(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      //Useg
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 6 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListUseg(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      //Tsag agaar
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 8 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListTime(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-      //Dalbaa
-      try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE cid = 7 AND active = 1 ORDER BY sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListFlag(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-    });
 
+    });
   }, []);
   const playSound = async () => {
     try {
@@ -264,555 +155,59 @@ export default function Tabs({ props }) {
       console.error('Failed to play the sound', error);
     }
   };
-  // show sublists
-
-  const amitantablist = () => {
-    const tabbody = [];
-    // console.log(subListAmitan);
-    for (i = 0; i < subListAmitan.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Амьтад</Text> */}
-          <Text style={styles.postertext}>{subListAmitan[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-      <View style={styles.subview}>
-        <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
-        <Text style={styles.postertext}>Амьтад</Text>
-      </View>
-    </Pressable>
-    <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub8.png')}></Image>
-          <Text style={styles.postertext}>Амьтны үр төл</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub9.png')}></Image>
-          <Text style={styles.postertext}>Шувуу</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub10.png')}></Image>
-          <Text style={styles.postertext}>Далайн амьтад</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
-          <Text style={styles.postertext}>Шавж</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
-          <Text style={styles.postertext}>Үлэг гүрвэл</Text>
-        </View>
-      </Pressable> */}
-      </View>)
-  }
-  const hunstablist = () => {
-    const tabbody = [];
-    // console.log(subListHuns);
-    for (i = 0; i < subListHuns.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListHuns[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Ногоо</Text> */}
-          <Text style={styles.postertext}>{subListHuns[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-      <View style={styles.subview}>
-        <Image style={styles.postericon} source={require('../images/sub/sub7.png')}></Image>
-        <Text style={styles.postertext}>Ногоо</Text>
-      </View>
-    </Pressable>
-    
-    <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub8.png')}></Image>
-          <Text style={styles.postertext}>Жимс</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub9.png')}></Image>
-          <Text style={styles.postertext}>Хоол</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub10.png')}></Image>
-          <Text style={styles.postertext}>Уух зүйлс</Text>
-        </View>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
-          <Text style={styles.postertext}>Амттан</Text>
-        </View>
-      </Pressable> */}
-      </View>)
-  }
-  const miniitablist = () => {
-    const tabbody = [];
-    // console.log(subListMinii);
-    for (i = 0; i < subListMinii.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListMinii[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Ногоо</Text> */}
-          <Text style={styles.postertext}>{subListMinii[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub10.png')}></Image>
-              <Text style={styles.postertext}>Гэр бүл</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub11.png')}></Image>
-              <Text style={styles.postertext}>Тоглоом</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub13.png')}></Image>
-              <Text style={styles.postertext}>Хувцас</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub36.png')}></Image>
-              <Text style={styles.postertext}>Хүний бие</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub41.png')}></Image>
-              <Text style={styles.postertext}>Хөгжмийн зэмсэг</Text>
-            </View>
-          </Pressable> */}
-      </View>)
-  }
-  const gertablist = () => {
-    const tabbody = [];
-    // console.log(subListGer);
-    for (i = 0; i < subListGer.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListGer[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Миний өрөө</Text> */}
-          <Text style={styles.postertext}>{subListGer[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub17.png')}></Image>
-              <Text style={styles.postertext}>Миний өрөө</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub18.png')}></Image>
-              <Text style={styles.postertext}>Гал тогоо</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub19.png')}></Image>
-              <Text style={styles.postertext}>Угаалгын өрөө</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub20.png')}></Image>
-              <Text style={styles.postertext}>Манай гэр</Text>
-            </View>
-          </Pressable> */}
-      </View>)
-  }
-  const mashintablist = () => {
-    const tabbody = [];
-    // console.log(subListMashin);
-    for (i = 0; i < subListMashin.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListMashin[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Жижиг, дунд оврын</Text> */}
-          <Text style={styles.postertext}>{subListMashin[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-       <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub21.png')}></Image>
-              <Text style={styles.postertext}>Жижиг, дунд оврын</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub22.png')}></Image>
-              <Text style={styles.postertext}>Олон нийтийн</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub23.png')}></Image>
-              <Text style={styles.postertext}>Том оврын</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub24.png')}></Image>
-              <Text style={styles.postertext}>Машины брэнд, лого</Text>
-            </View>
-          </Pressable> */}
-      </View>)
-  }
-  const usegtablist = () => {
-    const tabbody = [];
-    // console.log(subListUseg);
-    for (i = 0; i < subListUseg.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListUseg[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Өнгө</Text> */}
-          <Text style={styles.postertext}>{subListUseg[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub25.png')}></Image>
-              <Text style={styles.postertext}>Өнгө</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub26.png')}></Image>
-              <Text style={styles.postertext}>Дүрс</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub27.png')}></Image>
-              <Text style={styles.postertext}>Тоо</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub28.png')}></Image>
-              <Text style={styles.postertext}>Улаан цэг</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub29.png')}></Image>
-              <Text style={styles.postertext}>Үсэг</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub30.png')}></Image>
-              <Text style={styles.postertext}>Англи үсэг</Text>
-            </View>
-          </Pressable> */}
-      </View>)
-  }
-  const weathertablist = () => {
-    const tabbody = [];
-    // console.log(subListTime);
-    for (i = 0; i < subListTime.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListTime[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Цаг агаар</Text> */}
-          <Text style={styles.postertext}>{subListTime[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub31.png')}></Image>
-              <Text style={styles.postertext}>Цаг агаар</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub32.png')}></Image>
-              <Text style={styles.postertext}>Улирал</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub33.png')}></Image>
-              <Text style={styles.postertext}>Цаг сурцгаая</Text>
-            </View>
-          </Pressable> */}
-      </View>)
-  }
-  const dalbaatablist = () => {
-    const tabbody = [];
-    // console.log(subListFlag);
-    for (i = 0; i < subListFlag.length; i++) {
-      tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-        <View style={styles.subview}>
-          <Image style={styles.postericon} source={needful.sub['sub' + subListFlag[i].sid].image}></Image>
-          {/* <Text style={styles.postertext}>Ази</Text> */}
-          <Text style={styles.postertext}>{subListFlag[i].sub_name}</Text>
-        </View>
-      </Pressable>);
-    }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-        {/* 
-      <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub34.png')}></Image>
-              <Text style={styles.postertext}>Ази</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub35.png')}></Image>
-              <Text style={styles.postertext}>Африк</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub36.png')}></Image>
-              <Text style={styles.postertext}>Европ</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub37.png')}></Image>
-              <Text style={styles.postertext}>Далайн</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub38.png')}></Image>
-              <Text style={styles.postertext}>Өмнөд америк</Text>
-            </View>
-          </Pressable>
-          <Pressable onPress={() => navigation.navigate("Delgerengui")}>
-            <View style={styles.subview}>
-              <Image style={styles.postericon} source={require('../images/sub/sub39.png')}></Image>
-              <Text style={styles.postertext}>Хойд америк</Text>
-            </View>
-          </Pressable> */}
-      </View>)
-  }
-
 
   //show cats
-  const showAmitanTabs = () => {
+  const showAmitanTabs = (ind) => {
     let tabsCat = [];
+    // console.log(catListAmitan);
     for (let i = 0; i < catListAmitan.length; i++) {
       tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}        >
-          <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
+        <View style={styles.thtab} key={'cat' + catListAmitan[ind].cid}     >
+          <Text style={styles.thtext}>{catListAmitan[ind].cat_name}</Text>
           {/* <Text style={styles.thtext}>Амьтан</Text> */}
         </View>
       )
-    }
-    return tabsCat;
-  }
-  const showHunsTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListHuns.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListHuns[i].cid}        >
-          <Text style={styles.thtext}>{catListHuns[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Хүнс</Text> */}
-        </View>
-      )
-    }
-    return tabsCat;
-  }
-  const showMiniiTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListMinii.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListMinii[i].cid}        >
-          <Text style={styles.thtext}>{catListMinii[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Миний</Text> */}
-        </View>
-      )
-    }
-    return tabsCat;
-  }
-  const showGerTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListGer.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListGer[i].cid}        >
-          <Text style={styles.thtext}>{catListGer[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Гэр</Text> */}
-        </View>
-      )
-    }
-    return tabsCat;
-  }
-  const showMashinTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListMashin.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListMashin[i].cid}        >
-          <Text style={styles.thtext}>{catListMashin[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Тээврийн хэрэгсэл</Text> */}
-        </View>
-      )
-    }
-    return tabsCat;
-  }
-  const showUsegTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListUseg.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListUseg[i].cid}        >
-          <Text style={styles.thtext}>{catListUseg[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Өнгө, дүрс, үсэг, тоо</Text> */}
-        </View>
-      )
-    }
-    return tabsCat;
-  }
-  const showTimeTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListTime.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListTime[i].cid}        >
-          <Text style={styles.thtext}>{catListTime[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Цаг агаар, цаг</Text> */}
-        </View>
-      )
-    }
-    return tabsCat;
-  }
-  const showFlagTabs = () => {
-    let tabsCat = [];
-    for (let i = 0; i < catListFlag.length; i++) {
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListFlag[i].cid}        >
-          <Text style={styles.thtext}>{catListFlag[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Далбаа</Text> */}
-        </View>
-      )
+      break;
     }
     return tabsCat;
   }
 
-  const FirstRoute = () => (
+  // show sublists
+
+  const amitantablist = (ind) => {
+    const tabbody = [];
+    // console.log(subListAmitan);
+    for (i = 0; i < subListAmitan.length; i++) {
+      if (subListAmitan[i].cid == ind + 1) {
+        tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+          <View style={styles.subview}>
+            <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
+            {/* <Text style={styles.postertext}>Амьтад</Text> */}
+            <Text style={styles.postertext}>{subListAmitan[i].sub_name}</Text>
+          </View>
+        </Pressable>);
+      }
+    }
+    return (
+      <View style={styles.iv}>
+        {tabbody}
+
+      </View>)
+  }
+
+
+
+
+
+  const FirstRoute = (ind) => (
     <View style={styles.tabcontainer}>
-      {showAmitanTabs()}
+      {showAmitanTabs(ind)}
       <ScrollView showsVerticalScrollIndicator={false}>
-        {amitantablist()}
+        {amitantablist(ind)}
       </ScrollView>
     </View>
   );
 
-  const SecondRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showHunsTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {hunstablist()}
-      </ScrollView>
-    </View>
-  );
-
-  const ThirdRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showMiniiTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {miniitablist()}
-      </ScrollView>
-    </View>
-  );
-
-  const FourthRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showGerTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {gertablist()}
-      </ScrollView>
-    </View>
-  );
-  const FifthRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showMashinTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {mashintablist()}
-      </ScrollView>
-    </View>
-  );
-
-  const SixthRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showUsegTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {usegtablist()}
-      </ScrollView>
-    </View>
-  );
-  const SeventhRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showTimeTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {weathertablist()}
-      </ScrollView>
-    </View>
-  );
-  const EightthRoute = () => (
-    <View style={styles.tabcontainer}>
-      {showFlagTabs()}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {dalbaatablist()}
-      </ScrollView>
-    </View>
-  );
   const NinethRoute = () => (
     <View style={styles.tabcontainer}>
       <View style={styles.thtab}>
@@ -861,15 +256,15 @@ export default function Tabs({ props }) {
   );
 
   const renderScene = SceneMap({
-    "1": FirstRoute,
-    "2": SecondRoute,
-    "3": ThirdRoute,
-    "4": FourthRoute,
-    "5": FifthRoute,
-    "6": SixthRoute,
-    "7": SeventhRoute,
-    "8": EightthRoute,
-    "9": NinethRoute,
+    "1": () => FirstRoute(0),
+    "2": () => FirstRoute(1),
+    "3": () => FirstRoute(2),
+    "4": () => FirstRoute(3),
+    "5": () => FirstRoute(4),
+    "6": () => FirstRoute(5),
+    "7": () => FirstRoute(6),
+    "8": () => FirstRoute(7),
+    "9": () => NinethRoute(),
   });
 
   const [index, setIndex] = React.useState(0);
