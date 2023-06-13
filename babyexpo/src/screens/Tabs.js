@@ -142,13 +142,16 @@ export default function Tabs({ props }) {
     let tabsCat = [];
     // console.log(catListAmitan);
     for (let i = 0; i < catListAmitan.length; i++) {
+      if(catListAmitan[i].cid==ind){
       tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListAmitan[ind].cid}     >
-          <Text style={styles.thtext}>{catListAmitan[ind].cat_name}</Text>
+        <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}     >
+          <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
           {/* <Text style={styles.thtext}>Амьтан</Text> */}
         </View>
       )
-      break;
+      break
+    }
+      
     }
     return tabsCat;
   }
@@ -159,7 +162,7 @@ export default function Tabs({ props }) {
     const tabbody = [];
     // console.log(subListAmitan);
     for (i = 0; i < subListAmitan.length; i++) {
-      if (subListAmitan[i].cid == ind + 1) {
+      if (subListAmitan[i].cid == ind) {
         tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
           <View style={styles.subview}>
             <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
@@ -233,13 +236,13 @@ export default function Tabs({ props }) {
   );
 
   const renderScene = SceneMap({
-    "1": () => FirstRoute(0),
-    "2": () => FirstRoute(1),
-    "3": () => FirstRoute(2),
-    "4": () => FirstRoute(3),
+    "1": () => FirstRoute(1),
+    "2": () => FirstRoute(2),
+    "3": () => FirstRoute(3),
+    "4": () => FirstRoute(9),
     "5": () => FirstRoute(4),
-    "6": () => FirstRoute(5),
-    "7": () => FirstRoute(6),
+    "6": () => FirstRoute(6),
+    "7": () => FirstRoute(8),
     "8": () => FirstRoute(7),
     "9": () => NinethRoute(),
   });
