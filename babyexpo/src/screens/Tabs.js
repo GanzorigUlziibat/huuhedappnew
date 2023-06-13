@@ -17,6 +17,7 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful'
+
 export default function Tabs({ props }) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
@@ -254,7 +255,15 @@ export default function Tabs({ props }) {
     });
 
   }, []);
-
+  const playSound = async () => {
+    try {
+      const soundObject = new Audio.Sound();
+      await soundObject.loadAsync(require("../sounds/cat/cat1.mp3"));
+      await soundObject.playAsync();
+    } catch (error) {
+      console.error('Failed to play the sound', error);
+    }
+  };
   // show sublists
 
   const amitantablist = () => {
@@ -899,6 +908,7 @@ export default function Tabs({ props }) {
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
+        onSwipeStart={playSound}
         initialLayout={{ width: layout.width }}
       />
     </SafeAreaView>
