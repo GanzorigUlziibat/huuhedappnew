@@ -22,24 +22,8 @@ export default function Tabs({ props }) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   const [catListAmitan, setCatListAmitan] = useState([]);
-  const [catListHuns, setCatListHuns] = useState([]);
-  const [catListMinii, setCatListMinii] = useState([]);
-  const [catListGer, setCatListGer] = useState([]);
-  const [catListMashin, setCatListMashin] = useState([]);
-  const [catListUseg, setCatListUseg] = useState([]);
-  const [catListTime, setCatListTime] = useState([]);
-  const [catListFlag, setCatListFlag] = useState([]);
-
-  const [subListHuns, setSubListHuns] = useState([]);
   const [subListAmitan, setSubListAmitan] = useState([]);
-  const [subListMinii, setSubListMinii] = useState([]);
-  const [subListGer, setSubListGer] = useState([]);
-  const [subListMashin, setSubListMashin] = useState([]);
-  const [subListUseg, setSubListUseg] = useState([]);
-  const [subListTime, setSubListTime] = useState([]);
-  const [subListFlag, setSubListFlag] = useState([]);
   const db = SQLite.openDatabase('babyDatabase.db');
-
 
   useEffect(() => {
 
@@ -111,9 +95,6 @@ export default function Tabs({ props }) {
         console.log('Error inserting baby_subitemcount:', error);
       }
     });
-
-
-
   }, []);
 
   useEffect(() => {
