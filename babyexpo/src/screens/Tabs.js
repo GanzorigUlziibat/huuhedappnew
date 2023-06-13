@@ -195,10 +195,6 @@ export default function Tabs({ props }) {
       </View>)
   }
 
-
-
-
-
   const FirstRoute = (ind) => (
     <View style={styles.tabcontainer}>
       {showAmitanTabs(ind)}
