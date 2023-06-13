@@ -138,16 +138,16 @@ export default function Tabs({ props }) {
     let tabsCat = [];
     // console.log(catListAmitan);
     for (let i = 0; i < catListAmitan.length; i++) {
-      if(catListAmitan[i].cid==ind){
-      tabsCat.push(
-        <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}     >
-          <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
-          {/* <Text style={styles.thtext}>Амьтан</Text> */}
-        </View>
-      )
-      break
-    }
-      
+      if (catListAmitan[i].cid == ind) {
+        tabsCat.push(
+          <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}     >
+            <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
+            {/* <Text style={styles.thtext}>Амьтан</Text> */}
+          </View>
+        )
+        break
+      }
+
     }
     return tabsCat;
   }
@@ -159,7 +159,7 @@ export default function Tabs({ props }) {
     // console.log(subListAmitan);
     for (i = 0; i < subListAmitan.length; i++) {
       if (subListAmitan[i].cid == ind) {
-        tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
+        tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui" + subListAmitan[i].sid)}>
           <View style={styles.subview}>
             <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
             {/* <Text style={styles.postertext}>Амьтад</Text> */}
