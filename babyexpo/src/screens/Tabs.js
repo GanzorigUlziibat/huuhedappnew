@@ -26,9 +26,6 @@ export default function Tabs({ props }) {
   const db = SQLite.openDatabase('babyDatabase.db');
 
   useEffect(() => {
-
-    // alert123);
-
     // Create a table baby_cat
     db.transaction(tx => {
       try {
@@ -98,7 +95,6 @@ export default function Tabs({ props }) {
   }, []);
 
   useEffect(() => {
-    // alert(78912345);
     // Cat query
     db.transaction((tx) => {
       try {
