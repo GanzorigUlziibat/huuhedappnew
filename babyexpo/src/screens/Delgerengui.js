@@ -18,7 +18,6 @@ export default function Delgerengui({ navigation }) {
   const db = SQLite.openDatabase('babyDatabase.db');
 
   const [subListamitad, setSubListamitad] = useState([]);
-  const [subListamitadvr, setSubListamitadvr] = useState([]);
   useEffect(() => {
     // Select query
     db.transaction((tx) => {
@@ -42,15 +41,16 @@ export default function Delgerengui({ navigation }) {
     const tabbody = [];
     for (i = 0; i < subListamitad.length; i++) {
       // console.log('item' + subListamitad[i].item_id);
-      tabbody.push(<View style={styles.items}>
-        <View  >
-          <Image
-            style={styles.i}
-            source={needful.subitem['item' + (subListamitad[i].item_id + 1)].image}
-          ></Image>
-          {/* <Text>{subListamitad[i].item_name}</Text> */}
-        </View>
-      </View>)
+      tabbody.push(
+        <View style={styles.items}>
+          <View style={styles.iv}>
+            <Image
+              style={styles.i}
+              source={needful.subitem['item' + (subListamitad[i].item_id + 1)].image}
+            ></Image>
+            {/* <Text>{subListamitad[i].item_name}</Text> */}
+          </View>
+        </View>)
     }
     return tabbody;
   }
@@ -63,29 +63,10 @@ export default function Delgerengui({ navigation }) {
           {/* {amitadtablist()} */}
         </View>
       </Pressable>
-      <ScrollView>
-        {amitadtablist()}
-        {/* <View style={styles.items}>
-          <View>
-            <Image
-              style={styles.i}
-              source={require("../images/pngtree.jpg")}
-            ></Image>
-          </View>
-          <View>
-            <Image
-              style={styles.i}
-              source={require("../images/pngtree.jpg")}
-            ></Image>
-          </View>
-
-          <View>
-            <Image
-              style={styles.i}
-              source={require("../images/pngtree.jpg")}
-            ></Image>
-          </View>
-        </View> */}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.card}>
+          {amitadtablist()}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -111,20 +92,30 @@ const styles = StyleSheet.create({
     color: "white",
     margin: 5,
   },
-  items: {
+  card: {
     flexDirection: "row",
     flexWrap: "wrap",
-    margin: 10,
-
+    justifyContent: "center",
+    flexGrow: 1,
   },
-  i: {
-    width: 120,
+  items: {
+    margin: 5,
+    marginTop: 10
+  },
+  iv: {
+    width: 110,
     height: 160,
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 12,
     borderWidth: 5,
-    margin: 5,
     borderColor: "purple",
-    // resizeMode: "stretch",
+  },
+  i: {
+    width: '100%',
+    height: 600,
+    resizeMode: "contain",
   },
 
 });

@@ -159,7 +159,7 @@ export default function Tabs({ props }) {
     // console.log(subListAmitan);
     for (i = 0; i < subListAmitan.length; i++) {
       if (subListAmitan[i].cid == ind) {
-        tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui" + subListAmitan[i].sid)}>
+        tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
           <View style={styles.subview}>
             <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
             {/* <Text style={styles.postertext}>Амьтад</Text> */}
