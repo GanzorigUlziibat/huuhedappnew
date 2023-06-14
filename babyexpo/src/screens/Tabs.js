@@ -123,14 +123,18 @@ export default function Tabs({ props }) {
 
     });
   }, []);
-  const playSound = async () => {
-    try {
-      const soundObject = new Audio.Sound();
-      await soundObject.loadAsync(require("../sounds/cat/cat1.mp3"));
-      await soundObject.playAsync();
-    } catch (error) {
-      console.error('Failed to play the sound', error);
-    }
+  const playSound = async (ind) => {
+    // for (i = 0; i < catListAmitan.length; i++) {
+      // if (catListAmitan[i].cid == ind) {
+        try {
+          const soundObject = new Audio.Sound();
+          await soundObject.loadAsync(needful.cat['cat' + catListAmitan[ind].cid].sound);
+          await soundObject.playAsync();
+        } catch (error) {
+          console.error('Failed to play the sound', error);
+        }
+      // }
+    // }
   };
 
   //show cats
@@ -244,6 +248,14 @@ export default function Tabs({ props }) {
   });
 
   const [index, setIndex] = React.useState(0);
+  const indexchange =()=>{
+    setIndex()
+  }
+  useEffect(() => {
+    console.log(catListAmitan[index].cid)
+    playSound(catListAmitan[index].cat_id);
+    console.log(index)
+  },[index])
   const [routes] = React.useState([
     { key: "1", icon: "dog" },
     { key: "2", icon: "hamburger" },
@@ -279,7 +291,6 @@ export default function Tabs({ props }) {
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
-        onSwipeStart={playSound}
         initialLayout={{ width: layout.width }}
       />
     </SafeAreaView>
