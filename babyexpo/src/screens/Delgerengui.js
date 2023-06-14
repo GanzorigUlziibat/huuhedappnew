@@ -16,7 +16,7 @@ import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful'
 export default function Delgerengui({ navigation }) {
   const db = SQLite.openDatabase('babyDatabase.db');
-
+  const { itemId, otherParam } = route.params;
   const [subListamitad, setSubListamitad] = useState([]);
   useEffect(() => {
     // Select query
@@ -36,7 +36,7 @@ export default function Delgerengui({ navigation }) {
       });
     });
   }, []);
-  const amitadtablist = () => {
+  const amitadtablist = ({ route, navigation }) => {
     // console.log(subListamitad);
     const tabbody = [];
     for (i = 0; i < subListamitad.length; i++) {
