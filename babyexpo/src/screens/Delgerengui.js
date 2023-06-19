@@ -19,45 +19,52 @@ export default function Delgerengui({ navigation, route }) {
   const db = SQLite.openDatabase('babyDatabase.db');
   const { sid } = route.params;
   const [subItemList, setSubItemList] = useState([]);
-  const [subList, setSubList] = useState([]);
+  // const [subList, setSubList] = useState([]);
   useEffect(() => {
     // Select query
     //amitad
     db.transaction((tx) => {
       try {
-        tx.executeSql('SELECT * FROM baby_subitem WHERE ' + sid + ' AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
+
+        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_sub.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY item_id';
+        console.log(query);
+        tx.executeSql(query, [], (_, { rows }) => {
           const result = rows._array;
 
           setSubItemList(result);
-          // console.log(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
-    });
-    db.transaction((tx) => {
-      try {
-        tx.executeSql('SELECT * from baby_sub inner join baby_cat where baby_sub.active=1 order by baby_cat.cid and sid', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubList(result);
-        });
-      } catch (error) {
-        console.log('Error executing select query:', error);
-      }
 
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
     });
+    // db.transaction((tx) => {
+    //   try {
+    //     tx.executeSql('SELECT * from baby_sub inner join baby_cat where baby_sub.active=1 order by baby_cat.cid and sid', [], (_, { rows }) => {
+    //       const result = rows._array;
+    //       setSubList(result);
+    //     });
+    //   } catch (error) {
+    //     console.log('Error executing select query:', error);
+    //   }
+
+    // });
   }, []);
   const amitadtablist = () => {
     // console.log(subItemList);
     const tabbody = [];
+
     for (i = 0; i < subItemList.length; i++) {
-      // console.log('item' + subItemList[i].item_id);
+      // tabbody.push(<Text>123</Text>)
+      { console.log('item' + (subItemList[i].iid)) }
       tabbody.push(
         <View style={styles.items}>
           <View style={styles.iv}>
             <Image
               style={styles.i}
-              source={needful.subitem['item' + (subItemList[i].item_id + 1)].image}
+              key={'item' + (subItemList[i].iid)}
+
+              source={needful.subitem['item' + (subItemList[i].iid)].image}
             ></Image>
             <Text>{subItemList[i].item_name}</Text>
           </View>
@@ -66,13 +73,16 @@ export default function Delgerengui({ navigation, route }) {
     return tabbody;
   }
   return (
+
     <SafeAreaView style={styles.container}>
       <Pressable onPress={() => navigation.goBack()}>
         <View style={styles.thead}>
           <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
-          <Text style={styles.thtxt}>Амьтад</Text>
+          {/* <Text>{console.log(subItemList)}</Text> */}
+          <Text style={styles.thtxt}>{subItemList[1]?.sub_name}</Text>
+
           {/* <Text style={styles.thtxt}>{setSubList[1].sub_name}</Text> */}
-          {amitadtablist()}
+          {/* {amitadtablist()} */}
         </View>
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>

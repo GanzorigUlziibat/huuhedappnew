@@ -114,10 +114,10 @@ export default function Tabs({ props }) {
       if (subListAmitan[i]?.cid === ind) {
         const sub = subListAmitan[i];
         tabbody.push(
-          <Pressable onPress={() => navigation.navigate("Delgerengui", sub?.sid)}>
+          <Pressable key={'press' + subListAmitan[i].sid} onPress={() => navigation.navigate("Delgerengui", { sid: subListAmitan[i].sid })}>
             <View style={styles.subview}>
-              <Image style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
-              <Text style={styles.postertext}>{sub?.sub_name}</Text>
+              <Image key={'image' + subListAmitan[i].sid} style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
+              <Text key={'txt' + subListAmitan[i].sid} style={styles.postertext}>{sub?.sub_name}</Text>
             </View>
           </Pressable>
         );
@@ -200,7 +200,7 @@ export default function Tabs({ props }) {
   }
   useEffect(() => {
     if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
-      console.log(catListAmitan[index].cat_id);
+      // console.log(catListAmitan[index].cat_id);
       playSound(catListAmitan[index].cat_id);
       console.log(index);
     }
