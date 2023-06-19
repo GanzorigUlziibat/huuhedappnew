@@ -55,15 +55,15 @@ export default function Tabs({ props }) {
   }, []);
   const playSound = async (ind) => {
     // for (i = 0; i < catListAmitan.length; i++) {
-      // if (catListAmitan[i].cid == ind) {
-        try {
-          const soundObject = new Audio.Sound();
-          await soundObject.loadAsync(needful.cat['cat' + catListAmitan[ind].cid].sound);
-          await soundObject.playAsync();
-        } catch (error) {
-          console.error('Failed to play the sound', error);
-        }
-      // }
+    // if (catListAmitan[i].cid == ind) {
+    try {
+      const soundObject = new Audio.Sound();
+      await soundObject.loadAsync(needful.cat['cat' + catListAmitan[ind].cid].sound);
+      await soundObject.playAsync();
+    } catch (error) {
+      console.error('Failed to play the sound', error);
+    }
+    // }
     // }
   };
 
@@ -74,7 +74,7 @@ export default function Tabs({ props }) {
     for (let i = 0; i < catListAmitan.length; i++) {
       if (catListAmitan[i].cid == ind) {
         tabsCat.push(
-          <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}     >
+          <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}>
             <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
             {/* <Text style={styles.thtext}>Амьтан</Text> */}
           </View>
@@ -88,26 +88,43 @@ export default function Tabs({ props }) {
 
   // show sublists
 
+  // const amitantablist = (ind) => {
+  //   const tabbody = [];
+  //   // console.log(subListAmitan);
+  //   for (i = 0; i < subListAmitan.length; i++) {
+  //     if (subListAmitan[i].cid == ind) {
+  //       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui", subListAmitan[i].sid)}>
+  //         <View style={styles.subview}>
+  //           <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
+  //           {/* <Text style={styles.postertext}>Амьтад</Text> */}
+  //           <Text style={styles.postertext}>{subListAmitan[i].sub_name}</Text>
+  //         </View>
+  //       </Pressable>);
+  //     }
+  //   }
+  //   return (
+  //     <View style={styles.iv}>
+  //       {tabbody}
+
+  //     </View>)
+  // }
   const amitantablist = (ind) => {
     const tabbody = [];
-    // console.log(subListAmitan);
-    for (i = 0; i < subListAmitan.length; i++) {
-      if (subListAmitan[i].cid == ind) {
-        tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui")}>
-          <View style={styles.subview}>
-            <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
-            {/* <Text style={styles.postertext}>Амьтад</Text> */}
-            <Text style={styles.postertext}>{subListAmitan[i].sub_name}</Text>
-          </View>
-        </Pressable>);
+    for (let i = 0; i < subListAmitan.length; i++) {
+      if (subListAmitan[i]?.cid === ind) {
+        const sub = subListAmitan[i];
+        tabbody.push(
+          <Pressable onPress={() => navigation.navigate("Delgerengui", sub?.sid)}>
+            <View style={styles.subview}>
+              <Image style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
+              <Text style={styles.postertext}>{sub?.sub_name}</Text>
+            </View>
+          </Pressable>
+        );
       }
     }
-    return (
-      <View style={styles.iv}>
-        {tabbody}
-
-      </View>)
-  }
+    return <View style={styles.iv}>{tabbody}</View>;
+  };
 
   const FirstRoute = (ind) => (
     <View style={styles.tabcontainer}>
@@ -178,7 +195,7 @@ export default function Tabs({ props }) {
   });
 
   const [index, setIndex] = React.useState(0);
-  const indexchange =()=>{
+  const indexchange = () => {
     setIndex()
   }
   useEffect(() => {
@@ -188,7 +205,7 @@ export default function Tabs({ props }) {
       console.log(index);
     }
   }, [catListAmitan, index]);
-  
+
   const [routes] = React.useState([
     { key: "1", icon: "dog" },
     { key: "2", icon: "hamburger" },

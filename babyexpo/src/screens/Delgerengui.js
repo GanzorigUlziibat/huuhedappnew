@@ -10,45 +10,56 @@ import {
   Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation, useRoute } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful'
-export default function Delgerengui({ navigation }) {
+export default function Delgerengui({ navigation, route }) {
+  // const route = useRoute();
   const db = SQLite.openDatabase('babyDatabase.db');
-  const { itemId, otherParam } = route.params;
-  const [subListamitad, setSubListamitad] = useState([]);
+  const { sid } = route.params;
+  const [subItemList, setSubItemList] = useState([]);
+  const [subList, setSubList] = useState([]);
   useEffect(() => {
     // Select query
+    //amitad
     db.transaction((tx) => {
-      //amitad
-      db.transaction((tx) => {
-        try {
-          tx.executeSql('SELECT * FROM baby_subitem WHERE sid = 1 AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
-            const result = rows._array;
+      try {
+        tx.executeSql('SELECT * FROM baby_subitem WHERE ' + sid + ' AND active = 1 ORDER BY item_id', [], (_, { rows }) => {
+          const result = rows._array;
 
-            setSubListamitad(result);
-            // console.log(result);
-          });
-        } catch (error) {
-          console.log('Error executing select query:', error);
-        }
-      });
+          setSubItemList(result);
+          // console.log(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+    });
+    db.transaction((tx) => {
+      try {
+        tx.executeSql('SELECT * from baby_sub inner join baby_cat where baby_sub.active=1 order by baby_cat.cid and sid', [], (_, { rows }) => {
+          const result = rows._array;
+          setSubList(result);
+        });
+      } catch (error) {
+        console.log('Error executing select query:', error);
+      }
+
     });
   }, []);
-  const amitadtablist = ({ route, navigation }) => {
-    // console.log(subListamitad);
+  const amitadtablist = () => {
+    // console.log(subItemList);
     const tabbody = [];
-    for (i = 0; i < subListamitad.length; i++) {
-      // console.log('item' + subListamitad[i].item_id);
+    for (i = 0; i < subItemList.length; i++) {
+      // console.log('item' + subItemList[i].item_id);
       tabbody.push(
         <View style={styles.items}>
           <View style={styles.iv}>
             <Image
               style={styles.i}
-              source={needful.subitem['item' + (subListamitad[i].item_id + 1)].image}
+              source={needful.subitem['item' + (subItemList[i].item_id + 1)].image}
             ></Image>
-            {/* <Text>{subListamitad[i].item_name}</Text> */}
+            <Text>{subItemList[i].item_name}</Text>
           </View>
         </View>)
     }
@@ -60,7 +71,8 @@ export default function Delgerengui({ navigation }) {
         <View style={styles.thead}>
           <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
           <Text style={styles.thtxt}>Амьтад</Text>
-          {/* {amitadtablist()} */}
+          {/* <Text style={styles.thtxt}>{setSubList[1].sub_name}</Text> */}
+          {amitadtablist()}
         </View>
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
