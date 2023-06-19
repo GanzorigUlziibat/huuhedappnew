@@ -53,7 +53,7 @@ export default function Tabs({ props }) {
 
     });
   }, []);
-  const playSound = async (ind) => {
+  const playCatSound = async (ind) => {
     // for (i = 0; i < catListAmitan.length; i++) {
     // if (catListAmitan[i].cid == ind) {
     try {
@@ -201,7 +201,7 @@ export default function Tabs({ props }) {
   useEffect(() => {
     if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
       // console.log(catListAmitan[index].cat_id);
-      playSound(catListAmitan[index].cat_id);
+      playCatSound(catListAmitan[index].cat_id);
       console.log(index);
     }
   }, [catListAmitan, index]);
