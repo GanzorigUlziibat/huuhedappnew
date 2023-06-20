@@ -54,8 +54,7 @@ export default function Tabs({ props }) {
     });
   }, []);
   const playCatSound = async (ind) => {
-    // for (i = 0; i < catListAmitan.length; i++) {
-    // if (catListAmitan[i].cid == ind) {
+ 
     try {
       const soundObject = new Audio.Sound();
       await soundObject.loadAsync(needful.cat['cat' + catListAmitan[ind].cid].sound);
@@ -63,8 +62,6 @@ export default function Tabs({ props }) {
     } catch (error) {
       console.error('Failed to play the sound', error);
     }
-    // }
-    // }
   };
 
   //show cats
@@ -86,28 +83,6 @@ export default function Tabs({ props }) {
     return tabsCat;
   }
 
-  // show sublists
-
-  // const amitantablist = (ind) => {
-  //   const tabbody = [];
-  //   // console.log(subListAmitan);
-  //   for (i = 0; i < subListAmitan.length; i++) {
-  //     if (subListAmitan[i].cid == ind) {
-  //       tabbody.push(<Pressable onPress={() => navigation.navigate("Delgerengui", subListAmitan[i].sid)}>
-  //         <View style={styles.subview}>
-  //           <Image style={styles.postericon} source={needful.sub['sub' + subListAmitan[i].sid].image}></Image>
-  //           {/* <Text style={styles.postertext}>Амьтад</Text> */}
-  //           <Text style={styles.postertext}>{subListAmitan[i].sub_name}</Text>
-  //         </View>
-  //       </Pressable>);
-  //     }
-  //   }
-  //   return (
-  //     <View style={styles.iv}>
-  //       {tabbody}
-
-  //     </View>)
-  // }
   const amitantablist = (ind) => {
     const tabbody = [];
     for (let i = 0; i < subListAmitan.length; i++) {
