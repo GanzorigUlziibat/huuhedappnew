@@ -187,12 +187,12 @@ export default function Tabs({ props }) {
     setIndex()
   }
   useEffect(() => {
-    // if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
+    if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
       // console.log(catListAmitan[index].cat_id);
       playCatSound(catListAmitan[index].cid);
       console.log(index);
-    // }
-  }, [index]);
+    }
+  }, [catListAmitan,index]);
 
   const [routes] = React.useState([
     { key: "1", icon: "dog" },
