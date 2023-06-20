@@ -26,7 +26,7 @@ export default function Delgerengui({ navigation, route }) {
     db.transaction((tx) => {
       try {
 
-        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_sub.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY item_id';
+        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_sub.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY sid';
         console.log(query);
         tx.executeSql(query, [], (_, { rows }) => {
           const result = rows._array;
@@ -56,17 +56,16 @@ export default function Delgerengui({ navigation, route }) {
 
     for (i = 0; i < subItemList.length; i++) {
       // tabbody.push(<Text>123</Text>)
-      { console.log('item' + (subItemList[i].iid)) }
+      // { console.log('item' + (subItemList[i].iid)) }
       tabbody.push(
         <View style={styles.items}>
           <View style={styles.iv}>
             <Image
               style={styles.i}
               key={'item' + (subItemList[i].iid)}
-
               source={needful.subitem['item' + (subItemList[i].iid)].image}
             ></Image>
-            <Text>{subItemList[i].item_name}</Text>
+            {/* <Text>{subItemList[i].item_name}</Text> */}
           </View>
         </View>)
     }
@@ -78,11 +77,13 @@ export default function Delgerengui({ navigation, route }) {
       <Pressable onPress={() => navigation.goBack()}>
         <View style={styles.thead}>
           <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
-          {/* <Text>{console.log(subItemList)}</Text> */}
-          <Text style={styles.thtxt}>{subItemList[1]?.sub_name}</Text>
-
+          {subItemList.length > 0 && (
+            <Text style={styles.thtxt} key={'text' + subItemList[1]?.sub_name}>
+              {subItemList[1]?.sub_name}
+            </Text>
+          )}
+          {/* <Text style={styles.thtxt} key={'text' + (subItemList[i].iid)}>{subItemList[1]?.sub_name}</Text> */}
           {/* <Text style={styles.thtxt}>{setSubList[1].sub_name}</Text> */}
-          {/* {amitadtablist()} */}
         </View>
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
