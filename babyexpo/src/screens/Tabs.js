@@ -102,7 +102,7 @@ export default function Tabs({ props }) {
           <Pressable key={'press' + subListAmitan[i].sid} 
           onPress={() =>
             playSubSound(sub?.sid) ||
-            navigation.navigate("Delgerengui", { sid: subListAmitan[i].sid })}>
+            navigation.navigate('Delgerengui', { sid: subListAmitan[i].sid })}>
             <View style={styles.subview}>
               <Image key={'image' + subListAmitan[i].sid} style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
               <Text key={'txt' + subListAmitan[i].sid} style={styles.postertext}>{sub?.sub_name}</Text>
