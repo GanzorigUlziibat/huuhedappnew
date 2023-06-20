@@ -5,6 +5,7 @@ import Tabs from "./src/screens/Tabs";
 import Delgerengui from "./src/screens/Delgerengui";
 import Delgerengui2 from "./src/screens/Delgerengui2";
 import Home from "./src/screens/Home";
+import Delgerengui3 from "./src/screens/Delgerengui3";
 const HomeStack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <HomeStack.Screen name="Tabs" component={Tabs} />
         <HomeStack.Screen name="Delgerengui" component={Delgerengui} />
         <HomeStack.Screen name="Delgerengui2" component={Delgerengui2} />
+        <HomeStack.Screen name="Delgerengui3" component={Delgerengui3}/>
         <HomeStack.Screen name="Home" component={Home} />
       </HomeStack.Navigator>
     </NavigationContainer>
