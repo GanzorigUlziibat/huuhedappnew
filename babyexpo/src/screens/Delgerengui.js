@@ -26,7 +26,7 @@ export default function Delgerengui({ navigation, route }) {
     db.transaction((tx) => {
       try {
 
-        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_sub.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY sid';
+        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_subitem.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY baby_sub.sid';
         console.log(query);
         tx.executeSql(query, [], (_, { rows }) => {
           const result = rows._array;
@@ -38,39 +38,52 @@ export default function Delgerengui({ navigation, route }) {
         console.log('Error executing select query:', error);
       }
     });
-    // db.transaction((tx) => {
-    //   try {
-    //     tx.executeSql('SELECT * from baby_sub inner join baby_cat where baby_sub.active=1 order by baby_cat.cid and sid', [], (_, { rows }) => {
-    //       const result = rows._array;
-    //       setSubList(result);
-    //     });
-    //   } catch (error) {
-    //     console.log('Error executing select query:', error);
-    //   }
-
-    // });
   }, []);
-  const amitadtablist = () => {
-    // console.log(subItemList);
-    const tabbody = [];
-
-    for (i = 0; i < subItemList.length; i++) {
-      // tabbody.push(<Text>123</Text>)
-      // { console.log('item' + (subItemList[i].iid)) }
-      tabbody.push(
-        <View style={styles.items}>
-          <View style={styles.iv}>
-            <Image
-              style={styles.i}
-              key={'item' + (subItemList[i].iid)}
-              source={needful.subitem['item' + (subItemList[i].iid)].image}
-            ></Image>
-            {/* <Text>{subItemList[i].item_name}</Text> */}
-          </View>
-        </View>)
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
+    return shuffledArray;
+  };
+  // const amitadtablist = () => {
+  //   // console.log(subItemList);
+  //   const tabbody = [];
+
+  //   for (i = 0; i < subItemList.length; i++) {
+  //     // tabbody.push(<Text>123</Text>)
+  //     // { console.log('item' + (subItemList[i].iid)) }
+  //     tabbody.push(
+  //       <View style={styles.items}>
+  //         <View style={styles.iv}>
+  //           <Image
+  //             style={styles.i}
+  //             key={'item' + (subItemList[i].item_id)}
+  //             source={needful.subitem['item' + (subItemList[i].iid)].image}
+  //           ></Image>
+  //           {/* <Text>{subItemList[i].item_name}</Text> */}
+  //         </View>
+  //       </View>)
+  //   }
+  //   return tabbody;
+  // }
+  const amitadtablist = () => {
+    const shuffledItems = shuffleArray(subItemList);
+    const tabbody = shuffledItems.map((item) => (
+      <View style={styles.items} key={'item' + item.item_id}>
+        <View style={styles.iv}>
+          <Image
+            style={styles.i}
+            key={'item' + item.item_id} // Fix the key value to match the item_id
+            source={needful.subitem['item' + item.iid].image}
+          ></Image>
+        </View>
+      </View>
+    ));
+
     return tabbody;
-  }
+  };
   return (
 
     <SafeAreaView style={styles.container}>
