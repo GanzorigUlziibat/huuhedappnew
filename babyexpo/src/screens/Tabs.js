@@ -54,10 +54,20 @@ export default function Tabs({ props }) {
     });
   }, []);
   const playCatSound = async (ind) => {
- 
+
     try {
       const soundObject = new Audio.Sound();
-      await soundObject.loadAsync(needful.cat['cat' + catListAmitan[ind].cid].sound);
+      await soundObject.loadAsync(needful.cat[`cat${ind}`].sound);
+      await soundObject.playAsync();
+    } catch (error) {
+      console.error('Failed to play the sound', error);
+    }
+  };
+  const playSubSound = async (ind) => {
+
+    try {
+      const soundObject = new Audio.Sound();
+      await soundObject.loadAsync(needful.sub[`sub${ind}`].sound);
       await soundObject.playAsync();
     } catch (error) {
       console.error('Failed to play the sound', error);
@@ -89,7 +99,10 @@ export default function Tabs({ props }) {
       if (subListAmitan[i]?.cid === ind) {
         const sub = subListAmitan[i];
         tabbody.push(
-          <Pressable key={'press' + subListAmitan[i].sid} onPress={() => navigation.navigate("Delgerengui", { sid: subListAmitan[i].sid })}>
+          <Pressable key={'press' + subListAmitan[i].sid} 
+          onPress={() =>
+            playSubSound(sub?.sid) ||
+            navigation.navigate("Delgerengui", { sid: subListAmitan[i].sid })}>
             <View style={styles.subview}>
               <Image key={'image' + subListAmitan[i].sid} style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
               <Text key={'txt' + subListAmitan[i].sid} style={styles.postertext}>{sub?.sub_name}</Text>
@@ -174,12 +187,12 @@ export default function Tabs({ props }) {
     setIndex()
   }
   useEffect(() => {
-    if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
+    // if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
       // console.log(catListAmitan[index].cat_id);
-      playCatSound(catListAmitan[index].cat_id);
+      playCatSound(catListAmitan[index].cid);
       console.log(index);
-    }
-  }, [catListAmitan, index]);
+    // }
+  }, [index]);
 
   const [routes] = React.useState([
     { key: "1", icon: "dog" },
