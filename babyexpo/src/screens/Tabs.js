@@ -99,10 +99,10 @@ export default function Tabs({ props }) {
       if (subListAmitan[i]?.cid === ind) {
         const sub = subListAmitan[i];
         tabbody.push(
-          <Pressable key={'press' + subListAmitan[i].sid} 
-          onPress={() =>
-            navigation.navigate('Delgerengui', { sid: sub?.sid }) ||
-            playSubSound(sub?.sid)}>
+          <Pressable key={'press' + subListAmitan[i].sid}
+            onPress={() =>
+              navigation.navigate('Delgerengui', { sid: sub?.sid }) ||
+              playSubSound(sub?.sid)}>
             <View style={styles.subview}>
               <Image key={'image' + subListAmitan[i].sid} style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
               <Text key={'txt' + subListAmitan[i].sid} style={styles.postertext}>{sub?.sub_name}</Text>
@@ -192,7 +192,7 @@ export default function Tabs({ props }) {
       playCatSound(catListAmitan[index].cid);
       console.log(index);
     }
-  }, [catListAmitan,index]);
+  }, [catListAmitan, index]);
 
   const [routes] = React.useState([
     { key: "1", icon: "dog" },
