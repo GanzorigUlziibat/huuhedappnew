@@ -51,61 +51,61 @@ export default function Delgerengui({ navigation, route }) {
     }
   };
 
-  // const shuffleArray = (array) => {
-  //   const shuffledArray = [...array];
-  //   for (let i = shuffledArray.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  //   }
-  //   return shuffledArray;
-  // };
-  const amitadtablist = () => {
-    // console.log(subItemList);
-    const tabbody = [];
-
-    for (i = 0; i < subItemList.length; i++) {
-      // tabbody.push(<Text>123</Text>)
-      // { console.log('item' + (subItemList[i].iid)) }
-      tabbody.push(
-        <Pressable key={'press' + subItemList[i].item_id}
-          onPress={() => navigation.navigate("Delgerengui3")
-            // playItemSound(subItemList[i].iid)
-          }>
-          <View style={styles.items}>
-            <View style={styles.iv}>
-              <Image
-                style={styles.i}
-                key={'item' + (subItemList[i].item_id)}
-                source={needful.subitem['item' + (subItemList[i].iid)].image}
-              ></Image>
-              {/* <Text>{subItemList[i].item_name}</Text> */}
-            </View>
-          </View>
-        </Pressable>
-      )
+  const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
-    return tabbody;
-  }
+    return shuffledArray;
+  };
   // const amitadtablist = () => {
-  //   const shuffledItems = shuffleArray(subItemList);
-  //   const tabbody = shuffledItems.map((item) => (
-  //     <Pressable key={'press' + item.item_id}
-  //       onPress={() =>
-  //         playItemSound(item.iid)}>
-  //       <View style={styles.items} key={'item' + item.item_id}>
-  //         <View style={styles.iv}>
-  //           <Image
-  //             style={styles.i}
-  //             key={'item' + item.item_id} // Fix the key value to match the item_id
-  //             source={needful.subitem['item' + item.iid].image}
-  //           ></Image>
-  //         </View>
-  //       </View>
-  //     </Pressable>
-  //   ));
+  //   // console.log(subItemList);
+  //   const tabbody = [];
 
+  //   for (i = 0; i < subItemList.length; i++) {
+  //     // tabbody.push(<Text>123</Text>)
+  //     // { console.log('item' + (subItemList[i].iid)) }
+  //     tabbody.push(
+  //       <Pressable key={'press' + subItemList[i].item_id}
+  //         onPress={() => navigation.navigate("Delgerengui3")
+  //           // playItemSound(subItemList[i].iid)
+  //         }>
+  //         <View style={styles.items}>
+  //           <View style={styles.iv}>
+  //             <Image
+  //               style={styles.i}
+  //               key={'item' + (subItemList[i].item_id)}
+  //               source={needful.subitem['item' + (subItemList[i].iid)].image}
+  //             ></Image>
+  //             {/* <Text>{subItemList[i].item_name}</Text> */}
+  //           </View>
+  //         </View>
+  //       </Pressable>
+  //     )
+  //   }
   //   return tabbody;
-  // };
+  // }
+  const amitadtablist = () => {
+    const shuffledItems = shuffleArray(subItemList);
+    const tabbody = shuffledItems.map((item) => (
+      <Pressable key={'press' + item.item_id}
+        onPress={() =>
+          playItemSound(item.iid)}>
+        <View style={styles.items} key={'item' + item.item_id}>
+          <View style={styles.iv}>
+            <Image
+              style={styles.i}
+              key={'item' + item.item_id} // Fix the key value to match the item_id
+              source={needful.subitem['item' + item.iid].image}
+            ></Image>
+          </View>
+        </View>
+      </Pressable>
+    ));
+
+    return tabbody;
+  };
   return (
 
     <SafeAreaView style={styles.container}>
