@@ -26,8 +26,8 @@ export default function Delgerengui({ navigation, route }) {
     db.transaction((tx) => {
       try {
 
-        let query = 'SELECT *FROM baby_subitem INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_subitem.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY CASE WHEN baby_sub.shuffle = 1 THEN RANDOM() ELSE 0 END';
-        console.log(query);
+        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_subitemcount ON baby_subitem.iid = baby_subitemcount.countid INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_subitem.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY CASE WHEN baby_sub.shuffle = 1 THEN RANDOM() ELSE baby_subitem.item_id END';
+        // console.log(query);
         tx.executeSql(query, [], (_, { rows }) => {
           const result = rows._array;
 
