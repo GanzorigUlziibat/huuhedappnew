@@ -40,43 +40,77 @@ export default function Delgerengui({ navigation, route }) {
     });
   }, []);
 
-  const playItemSound = async () => {
+  // const playItemSound = async () => {
 
+  //   try {
+  //     const soundObject = new Audio.Sound();
+  //     await soundObject.loadAsync(needful.subitem[`item${subItemList[i].iid}`].sound);
+  //     await soundObject.playAsync();
+  //   } catch (error) {
+  //     console.error('Failed to play the sound', error);
+  //   }
+  // };
+  const playItemSound = async (iid) => {
     try {
       const soundObject = new Audio.Sound();
-      await soundObject.loadAsync(needful.subitem[`item${subItemList[i].iid}`].sound);
+      await soundObject.loadAsync(needful.subitem[`item${iid}`].sound);
       await soundObject.playAsync();
     } catch (error) {
       console.error('Failed to play the sound', error);
     }
   };
   const amitadtablist = () => {
-    // console.log(subItemList);
     const tabbody = [];
 
-    for (i = 0; i < subItemList.length; i++) {
-      // tabbody.push(<Text>123</Text>)
-      // { console.log('item' + (subItemList[i].iid)) }
+    for (let i = 0; i < subItemList.length; i++) {
       tabbody.push(
-        <Pressable key={'press' + subItemList[i].item_id}
-          onPress={() => navigation.navigate("Delgerengui3")
-            // playItemSound(subItemList[i].iid)
-          }>
+        <Pressable key={'press' + subItemList[i].item_id} onPress={() => {
+          navigation.navigate("Delgerengui3");
+          playItemSound(subItemList[i - 3].iid)
+        }}>
           <View style={styles.items}>
             <View style={styles.iv}>
               <Image
                 style={styles.i}
-                key={'item' + (subItemList[i].item_id)}
-                source={needful.subitem['item' + (subItemList[i].iid)].image}
-              ></Image>
+                key={'item' + subItemList[i].item_id}
+                source={needful.subitem['item' + subItemList[i].iid].image}
+              />
               {/* <Text>{subItemList[i].item_name}</Text> */}
             </View>
           </View>
         </Pressable>
-      )
+      );
     }
+
     return tabbody;
-  }
+  };
+  // const amitadtablist = () => {
+  //   // console.log(subItemList);
+  //   const tabbody = [];
+
+  //   for (i = 0; i < subItemList.length; i++) {
+  //     // tabbody.push(<Text>123</Text>)
+  //     // { console.log('item' + (subItemList[i].iid)) }
+  //     tabbody.push(
+  //       <Pressable key={'press' + subItemList[i].item_id}
+  //         onPress={() => navigation.navigate("Delgerengui3")
+  //           // playItemSound(subItemList[i].iid)
+  //         }>
+  //         <View style={styles.items}>
+  //           <View style={styles.iv}>
+  //             <Image
+  //               style={styles.i}
+  //               key={'item' + (subItemList[i].item_id)}
+  //               source={needful.subitem['item' + (subItemList[i].iid)].image}
+  //             ></Image>
+  //             {/* <Text>{subItemList[i].item_name}</Text> */}
+  //           </View>
+  //         </View>
+  //       </Pressable>
+  //     )
+  //   }
+  //   return tabbody;
+  // }
 
   return (
 
