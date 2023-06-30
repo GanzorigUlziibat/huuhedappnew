@@ -43,7 +43,7 @@ export default function Delgerengui3({ route, navigation }) {
               key={'item' + subItem[i].item_id}
               source={needful.subitem['item' + subItem[i].iid].image}
             />
-            {/* <Text>{subItemList[i].item_name}</Text> */}
+            <Text>{subItem[i].item_name}</Text>
           </View>
         </View>
 
