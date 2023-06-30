@@ -64,10 +64,14 @@ export default function Delgerengui({ navigation, route }) {
 
     for (let i = 0; i < subItemList.length; i++) {
       tabbody.push(
-        <Pressable key={'press' + subItemList[i].item_id} onPress={() => {
-          navigation.navigate("Delgerengui3");
-          playItemSound(subItemList[i - 3].iid)
-        }}>
+        <Pressable
+          key={'press' + subItemList[i].item_id}
+          onPress={() => {
+            navigation.navigate("Delgerengui3", { sid: subItemList[i].sid });
+            playItemSound(subItemList[i - 3].iid)
+          }}
+        >
+
           <View style={styles.items}>
             <View style={styles.iv}>
               <Image
