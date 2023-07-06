@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, Pressable } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, Pressable,StatusBar,
+  Platform, } from 'react-native'
 import React, { useEffect, useState } from "react";
 import needful from '../components/needful';
 import * as SQLite from 'expo-sqlite';
@@ -37,15 +38,14 @@ export default function Delgerengui3({ route, navigation }) {
         // >
         // </Pressable >
         <View style={styles.items}>
-          <View style={styles.iv}>
+          <Text key={'txt' + subItem[i].item_id}
+            style={styles.itemtxt}>{subItem[i].item_name}</Text>
             <Image
               style={styles.i}
-              key={'item' + subItem[i].item_id}
+              key={'img' + subItem[i].item_id}
               source={needful.subitem['item' + subItem[i].iid].image}
             />
-            <Text>{subItem[i].item_name}</Text>
           </View>
-        </View>
 
       );
     }
@@ -54,7 +54,7 @@ export default function Delgerengui3({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View>
         {subItems()}
       </View>
@@ -64,12 +64,24 @@ export default function Delgerengui3({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
   items: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   i: {
-    width: 300,
-    height: 300,
+    width: "100%",
+    height: 600,
+    resizeMode: "contain"
+  },
+  itemtxt: {
+    fontFamily: 'Arial',
+    fontSize: 40,
+    fontWeight: '900',
+    //textTransform: 'uppercase',
+    textTransform: 'lowercase',
   }
 });
