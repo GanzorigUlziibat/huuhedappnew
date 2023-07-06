@@ -59,7 +59,8 @@ export default function Delgerengui({ navigation, route }) {
       console.error('Failed to play the sound', error);
     }
   };
-  const amitadtablist = () => {
+  // алдааг олсон i утга 0- тэй тэнцүү байж алдаа зөв болно
+  const amitadtablist = (ind) => {
     const tabbody = [];
     // console.log(subItemList);
     for (let i = 0; i < subItemList.length; i++) {
@@ -67,8 +68,10 @@ export default function Delgerengui({ navigation, route }) {
         <Pressable
           key={'press' + subItemList[i].item_id}
           onPress={() => {
-            navigation.navigate("Delgerengui3", { item_id: subItemList[i - 3].iid });
-            playItemSound(subItemList[i - 3].iid)
+            navigation.navigate("Delgerengui3", { item_id: subItemList[i].iid }) ||
+              playItemSound(subItemList[i].iid)
+            console.log(subItemList[i].iid);
+            alert(i);
           }}
         >
 
