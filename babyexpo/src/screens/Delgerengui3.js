@@ -1,11 +1,10 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, ScrollView, Pressable,StatusBar,
-  Platform, } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, Image, StatusBar, Platform } from 'react-native';
 import React, { useEffect, useState } from "react";
 import needful from '../components/needful';
 import * as SQLite from 'expo-sqlite';
 
 export default function Delgerengui3({ route, navigation }) {
-  const db = SQLite.openDatabase('babyDatabase.db');
+  const db = SQLite.openDatabaseSync('babyDatabase.db');
   const [subItem, setSubItem] = useState([]);
   const { item_id } = route.params;
 
@@ -16,8 +15,8 @@ export default function Delgerengui3({ route, navigation }) {
         let query = 'SELECT * FROM baby_subitem WHERE iid = ' + item_id + '';
         // console.log(query);
         tx.executeSql(query, [item_id], (_, { rows }) => {
-          const result = rows._array;
-          setSubItem(result);
+        const result = rows._array;
+        setSubItem(result);
         });
       } catch (error) {
         console.log('Error executing select query:', error);
@@ -58,7 +57,6 @@ export default function Delgerengui3({ route, navigation }) {
       <View>
         {subItems()}
       </View>
-
     </SafeAreaView>
   );
 }
@@ -81,7 +79,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
     fontSize: 40,
     fontWeight: '900',
-    //textTransform: 'uppercase',
     textTransform: 'lowercase',
   }
 });

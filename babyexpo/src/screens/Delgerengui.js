@@ -10,21 +10,21 @@ import {
   Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-// import { useNavigation, useRoute } from "@react-navigation/native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import * as SQLite from 'expo-sqlite';
 import needful from '../components/needful';
 import { Audio } from 'expo-av';
+
 export default function Delgerengui({ navigation, route }) {
   // const route = useRoute();
-  const db = SQLite.openDatabase('babyDatabase.db');
+  const db = SQLite.openDatabaseSync('babyDatabase.db');
   const { sid } = route.params;
   const [subItemList, setSubItemList] = useState([]);
   useEffect(() => {
     // Select query
     //amitad
     db.transaction((tx) => {
-      try {
+        try {
 
         let query = 'SELECT * FROM baby_subitem INNER JOIN baby_subitemcount ON baby_subitem.iid = baby_subitemcount.countid INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_subitem.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY CASE WHEN baby_sub.shuffle = 1 THEN RANDOM() ELSE baby_subitem.item_id END';
         // console.log(query);
@@ -34,9 +34,9 @@ export default function Delgerengui({ navigation, route }) {
           setSubItemList(result);
 
         });
-      } catch (error) {
+        } catch (error) {
         console.log('Error executing select query:', error);
-      }
+        }
     });
   }, []);
 
@@ -53,12 +53,19 @@ export default function Delgerengui({ navigation, route }) {
   const playItemSound = async (iid) => {
     try {
       const soundObject = new Audio.Sound();
-      await soundObject.loadAsync(needful.subitem[`item${iid}`].sound);
-      await soundObject.playAsync();
+      const soundResource = needful.subitem[`item${iid}`]?.sound;
+      if (soundResource) {
+        await soundObject.loadAsync(soundResource);
+        await soundObject.playAsync();
+      } else {
+        console.warn('Sound resource not found for item:', iid);
+      }
     } catch (error) {
-      console.error('Failed to play the sound', error);
+      console.error('Failed to play sound', error);
     }
   };
+  
+
   // алдааг олсон i утга 0- тэй тэнцүү байж алдаа зөв болно
   const amitadtablist = (ind) => {
     const tabbody = [];
@@ -91,47 +98,17 @@ export default function Delgerengui({ navigation, route }) {
 
     return tabbody;
   };
-  // const amitadtablist = () => {
-  //   // console.log(subItemList);
-  //   const tabbody = [];
-
-  //   for (i = 0; i < subItemList.length; i++) {
-  //     // tabbody.push(<Text>123</Text>)
-  //     // { console.log('item' + (subItemList[i].iid)) }
-  //     tabbody.push(
-  //       <Pressable key={'press' + subItemList[i].item_id}
-  //         onPress={() => navigation.navigate("Delgerengui3")
-  //           // playItemSound(subItemList[i].iid)
-  //         }>
-  //         <View style={styles.items}>
-  //           <View style={styles.iv}>
-  //             <Image
-  //               style={styles.i}
-  //               key={'item' + (subItemList[i].item_id)}
-  //               source={needful.subitem['item' + (subItemList[i].iid)].image}
-  //             ></Image>
-  //             {/* <Text>{subItemList[i].item_name}</Text> */}
-  //           </View>
-  //         </View>
-  //       </Pressable>
-  //     )
-  //   }
-  //   return tabbody;
-  // }
 
   return (
-
     <SafeAreaView style={styles.container}>
       <Pressable onPress={() => navigation.goBack()}>
         <View style={styles.thead}>
-          <AntDesign name="arrowleft" style={styles.thicon}></AntDesign>
+          <AntDesign name="arrowleft" style={styles.thicon} />
           {subItemList.length > 0 && (
             <Text style={styles.thtxt} key={'text' + subItemList[1]?.sub_name}>
               {subItemList[1]?.sub_name}
             </Text>
           )}
-          {/* <Text style={styles.thtxt} key={'text' + (subItemList[i].iid)}>{subItemList[1]?.sub_name}</Text> */}
-          {/* <Text style={styles.thtxt}>{setSubList[1].sub_name}</Text> */}
         </View>
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -142,6 +119,7 @@ export default function Delgerengui({ navigation, route }) {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -150,13 +128,13 @@ const styles = StyleSheet.create({
   thtxt: {
     fontSize: 20,
     color: "white",
-    fontWeight: "400"
+    fontWeight: "400",
   },
   thead: {
     flexDirection: "row",
     alignItems: "center",
     height: 60,
-    backgroundColor: "#5D3FD3"
+    backgroundColor: "#5D3FD3",
   },
   thicon: {
     fontSize: 25,
@@ -171,7 +149,7 @@ const styles = StyleSheet.create({
   },
   items: {
     margin: 5,
-    marginTop: 10
+    marginTop: 10,
   },
   iv: {
     width: 110,
@@ -188,5 +166,4 @@ const styles = StyleSheet.create({
     height: 600,
     resizeMode: "contain",
   },
-
 });

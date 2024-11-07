@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, version } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -16,14 +16,14 @@ import { Audio } from 'expo-av';
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as SQLite from 'expo-sqlite';
-import needful from '../components/needful'
+import needful from '../components/needful';
 
 export default function Tabs({ props }) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   const [catListAmitan, setCatListAmitan] = useState([]);
   const [subListAmitan, setSubListAmitan] = useState([]);
-  const db = SQLite.openDatabase('babyDatabase.db');
+  const db = SQLite.openDatabaseSync('babyDatabase.db');
   useEffect(() => {
     // Cat query
     db.transaction((tx) => {
@@ -53,6 +53,8 @@ export default function Tabs({ props }) {
 
     });
   }, []);
+
+  // Play sound for category
   const playCatSound = async (ind) => {
 
     try {
@@ -63,6 +65,8 @@ export default function Tabs({ props }) {
       console.error('Failed to play the sound', error);
     }
   };
+
+  // Play sound for subcategory
   const playSubSound = async (ind) => {
 
     try {
@@ -93,6 +97,7 @@ export default function Tabs({ props }) {
     return tabsCat;
   }
 
+  // List subcategories within a category
   const amitantablist = (ind) => {
     const tabbody = [];
     for (let i = 0; i < subListAmitan.length; i++) {
@@ -100,9 +105,9 @@ export default function Tabs({ props }) {
         const sub = subListAmitan[i];
         tabbody.push(
           <Pressable key={'press' + subListAmitan[i].sid}
-            onPress={() =>
-              navigation.navigate('Delgerengui', { sid: sub?.sid }) ||
-              playSubSound(sub?.sid)}>
+            onPress={() => {
+              navigation.navigate('Delgerengui', { sid: sub?.sid });
+              playSubSound(sub?.sid);}}>
             <View style={styles.subview}>
               <Image key={'image' + subListAmitan[i].sid} style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
               <Text key={'txt' + subListAmitan[i].sid} style={styles.postertext}>{sub?.sub_name}</Text>
@@ -114,6 +119,7 @@ export default function Tabs({ props }) {
     return <View style={styles.iv}>{tabbody}</View>;
   };
 
+  // FirstRoute for categories
   const FirstRoute = (ind) => (
     <View style={styles.tabcontainer}>
       {showAmitanTabs(ind)}
@@ -123,6 +129,7 @@ export default function Tabs({ props }) {
     </View>
   );
 
+  // Route for "About Us" information
   const NinethRoute = () => (
     <View style={styles.tabcontainer}>
       <View style={styles.thtab}>
@@ -130,7 +137,7 @@ export default function Tabs({ props }) {
       </View>
       <ScrollView>
         <View style={styles.abimg}>
-          <Image source={require("../images/logoMandakh1.png")}></Image>
+        <Image source={require("../images/logoMandakh1.png")}></Image>
           <Text style={styles.mname}>мандах их сургууль</Text>
           <Text style={styles.itsname}>Мэдээлэл, Технологийн Сургууль</Text>
           <Text style={styles.middleText}>БИД МЭДЛЭГЭЭР БАЯЛГИЙГ БҮТЭЭНЭ</Text>
@@ -170,6 +177,7 @@ export default function Tabs({ props }) {
     </View>
   );
 
+  // Render routes with SceneMap
   const renderScene = SceneMap({
     "1": () => FirstRoute(1),
     "2": () => FirstRoute(2),
@@ -183,9 +191,10 @@ export default function Tabs({ props }) {
   });
 
   const [index, setIndex] = React.useState(0);
-  const indexchange = () => {
-    setIndex()
-  }
+  const indexchange = (newIndex) => {
+    setIndex(newIndex);
+  };
+  
   useEffect(() => {
     if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
       // console.log(catListAmitan[index].cat_id);
@@ -205,6 +214,8 @@ export default function Tabs({ props }) {
     { key: "8", icon: "flag" },
     { key: "9", icon: "info" },
   ]);
+
+  // Render tab bar with icons
   const renderTabBar = (props) => (
     <TabBar
       {...props}
@@ -222,6 +233,7 @@ export default function Tabs({ props }) {
       scrollEnabled={true}
     />
   );
+
   return (
     <SafeAreaView style={styles.container}>
       <TabView
@@ -234,6 +246,7 @@ export default function Tabs({ props }) {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -264,18 +277,9 @@ const styles = StyleSheet.create({
   },
   subview: {
     margin: 15,
-    marginTop: 2,
     height: 70,
     borderRadius: 20,
     flexDirection: "row",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
     elevation: 11,
     backgroundColor: "white",
     alignItems: "center",
@@ -311,12 +315,6 @@ const styles = StyleSheet.create({
   },
   middleText: {
     margin: 3,
-    color: '#1d5ede',
-    textAlign: 'center',
-  },
-  littleText: {
-    margin: 5,
-    fontSize: 12,
     color: '#1d5ede',
     textAlign: 'center',
   },
