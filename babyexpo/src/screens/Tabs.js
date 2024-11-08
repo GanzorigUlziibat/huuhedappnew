@@ -1,4 +1,4 @@
-import React, { useEffect, useState, version } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -12,69 +12,64 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { Audio } from 'expo-av';
+import { Audio } from "expo-av";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import * as SQLite from 'expo-sqlite';
-import needful from '../components/needful';
+import needful from "../components/needful";
+import { useSQLiteContext } from "expo-sqlite";
 
 export default function Tabs({ props }) {
   const layout = useWindowDimensions();
   const navigation = useNavigation();
   const [catListAmitan, setCatListAmitan] = useState([]);
   const [subListAmitan, setSubListAmitan] = useState([]);
-  const db = SQLite.openDatabaseSync('babyDatabase.db');
+  const db = useSQLiteContext();
+  console.log("database", db);
   useEffect(() => {
     // Cat query
-    db.transaction((tx) => {
+    const fetchData = async () => {
       try {
-        tx.executeSql('SELECT * from baby_cat where baby_cat.active=1 order by cat_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setCatListAmitan(result);
-        });
+        const result = await db.getAllAsync(
+          "SELECT * from baby_cat where baby_cat.active=1 order by cat_id"
+        );
+        setCatListAmitan(result);
       } catch (error) {
-        console.log('Error executing select query:', error);
+        console.log("Error executing select query:", error);
       }
-
-    });
-
-    //Sub query
-    db.transaction((tx) => {
-
+      //Sub query
       //Amitan
       try {
-        tx.executeSql('SELECT * FROM baby_sub WHERE active = 1 ORDER BY cid, sub_id', [], (_, { rows }) => {
-          const result = rows._array;
-          setSubListAmitan(result);
-        });
+        const result = await db.getAllAsync(
+          "SELECT * FROM baby_sub WHERE active = 1 ORDER BY cid, sub_id"
+        );
+        setSubListAmitan(result);
       } catch (error) {
-        console.log('Error executing select query:', error);
+        console.log("Error executing select query:", error);
       }
+    };
 
-    });
+    fetchData();
   }, []);
 
   // Play sound for category
   const playCatSound = async (ind) => {
-
     try {
       const soundObject = new Audio.Sound();
       await soundObject.loadAsync(needful.cat[`cat${ind}`].sound);
       await soundObject.playAsync();
     } catch (error) {
-      console.error('Failed to play the sound', error);
+      console.error("Failed to play the sound", error);
     }
   };
 
   // Play sound for subcategory
   const playSubSound = async (ind) => {
-
     try {
       const soundObject = new Audio.Sound();
       await soundObject.loadAsync(needful.sub[`sub${ind}`].sound);
       await soundObject.playAsync();
     } catch (error) {
-      console.error('Failed to play the sound', error);
+      console.error("Failed to play the sound", error);
     }
   };
 
@@ -85,17 +80,16 @@ export default function Tabs({ props }) {
     for (let i = 0; i < catListAmitan.length; i++) {
       if (catListAmitan[i].cid == ind) {
         tabsCat.push(
-          <View style={styles.thtab} key={'cat' + catListAmitan[i].cid}>
+          <View style={styles.thtab} key={"cat" + catListAmitan[i].cid}>
             <Text style={styles.thtext}>{catListAmitan[i].cat_name}</Text>
             {/* <Text style={styles.thtext}>Амьтан</Text> */}
           </View>
-        )
-        break
+        );
+        break;
       }
-
     }
     return tabsCat;
-  }
+  };
 
   // List subcategories within a category
   const amitantablist = (ind) => {
@@ -104,13 +98,25 @@ export default function Tabs({ props }) {
       if (subListAmitan[i]?.cid === ind) {
         const sub = subListAmitan[i];
         tabbody.push(
-          <Pressable key={'press' + subListAmitan[i].sid}
+          <Pressable
+            key={"press" + subListAmitan[i].sid}
             onPress={() => {
-              navigation.navigate('Delgerengui', { sid: sub?.sid });
-              playSubSound(sub?.sid);}}>
+              navigation.navigate("Delgerengui", { sid: sub?.sid });
+              playSubSound(sub?.sid);
+            }}
+          >
             <View style={styles.subview}>
-              <Image key={'image' + subListAmitan[i].sid} style={styles.postericon} source={needful.sub['sub' + sub?.sid]?.image}></Image>
-              <Text key={'txt' + subListAmitan[i].sid} style={styles.postertext}>{sub?.sub_name}</Text>
+              <Image
+                key={"image" + subListAmitan[i].sid}
+                style={styles.postericon}
+                source={needful.sub["sub" + sub?.sid]?.image}
+              ></Image>
+              <Text
+                key={"txt" + subListAmitan[i].sid}
+                style={styles.postertext}
+              >
+                {sub?.sub_name}
+              </Text>
             </View>
           </Pressable>
         );
@@ -137,22 +143,23 @@ export default function Tabs({ props }) {
       </View>
       <ScrollView>
         <View style={styles.abimg}>
-        <Image source={require("../images/logoMandakh1.png")}></Image>
+          <Image source={require("../images/logoMandakh1.png")}></Image>
           <Text style={styles.mname}>мандах их сургууль</Text>
           <Text style={styles.itsname}>Мэдээлэл, Технологийн Сургууль</Text>
           <Text style={styles.middleText}>БИД МЭДЛЭГЭЭР БАЯЛГИЙГ БҮТЭЭНЭ</Text>
           <Text style={styles.middleText}>
-            Мандах их сургуулийн Мэдээлэл, технологийн сургуулийн багш, оюутнуудын
-            хамтын бүтээл юм. Дараа дараагийн нэмэлт сайжруулалтыг элсэгч, дүү нар
-            нь сайжруулан, хөгжүүлж байна. Тус аппыг бид үнэ төлбөргүйгээр танд
-            болон таны бяцхан үрс, дүү нарт хүргэж байна.
+            Мандах их сургуулийн Мэдээлэл, технологийн сургуулийн багш,
+            оюутнуудын хамтын бүтээл юм. Дараа дараагийн нэмэлт сайжруулалтыг
+            элсэгч, дүү нар нь сайжруулан, хөгжүүлж байна. Тус аппыг бид үнэ
+            төлбөргүйгээр танд болон таны бяцхан үрс, дүү нарт хүргэж байна.
           </Text>
           <Text style={styles.middleText}>
             Зургуудыг https://all-free-download.com/ сайтаас ашигласан болно.
           </Text>
           <Text style={styles.middleText}>
-            Та санал хүсэлтээ Мандах их сургуулийн Мэдээлэл, Технологийн Сургууль
-            (https://www.facebook.com/MandakhIT) фейсбүүк хуудсанд хандана уу.
+            Та санал хүсэлтээ Мандах их сургуулийн Мэдээлэл, Технологийн
+            Сургууль (https://www.facebook.com/MandakhIT) фейсбүүк хуудсанд
+            хандана уу.
           </Text>
           <Text style={styles.middleText}>
             Улс орон, бүс нутгийн далбаа нь тухайн орон нутгийн өмч юм.
@@ -161,8 +168,8 @@ export default function Tabs({ props }) {
             Машин үйлдвэрлэгчдийн лого нь тухайн компанийн эздийн өмч юм.
           </Text>
           <Text style={styles.middleText}>
-            Хэрэв та өөрийн зохиогчийн эрхэд хамаарах ямар нэгэн зургийг олсон бол
-            бидэнтэй холбоо бариарай. Хүсвэл бид устгаж болно.
+            Хэрэв та өөрийн зохиогчийн эрхэд хамаарах ямар нэгэн зургийг олсон
+            бол бидэнтэй холбоо бариарай. Хүсвэл бид устгаж болно.
           </Text>
           <Text style={styles.littleText}>
             Бүх эрх хуулиар хамгаалагдсан © 2021.
@@ -179,24 +186,28 @@ export default function Tabs({ props }) {
 
   // Render routes with SceneMap
   const renderScene = SceneMap({
-    "1": () => FirstRoute(1),
-    "2": () => FirstRoute(2),
-    "3": () => FirstRoute(3),
-    "4": () => FirstRoute(9),
-    "5": () => FirstRoute(4),
-    "6": () => FirstRoute(6),
-    "7": () => FirstRoute(8),
-    "8": () => FirstRoute(7),
-    "9": () => NinethRoute(),
+    1: () => FirstRoute(1),
+    2: () => FirstRoute(2),
+    3: () => FirstRoute(3),
+    4: () => FirstRoute(9),
+    5: () => FirstRoute(4),
+    6: () => FirstRoute(6),
+    7: () => FirstRoute(8),
+    8: () => FirstRoute(7),
+    9: () => NinethRoute(),
   });
 
   const [index, setIndex] = React.useState(0);
   const indexchange = (newIndex) => {
     setIndex(newIndex);
   };
-  
+
   useEffect(() => {
-    if (catListAmitan.length > 0 && index >= 0 && index < catListAmitan.length) {
+    if (
+      catListAmitan.length > 0 &&
+      index >= 0 &&
+      index < catListAmitan.length
+    ) {
       // console.log(catListAmitan[index].cat_id);
       playCatSound(catListAmitan[index].cid);
       console.log(index);
@@ -277,9 +288,17 @@ const styles = StyleSheet.create({
   },
   subview: {
     margin: 15,
+    marginTop: 2,
     height: 70,
     borderRadius: 20,
     flexDirection: "row",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
     elevation: 11,
     backgroundColor: "white",
     alignItems: "center",
@@ -305,17 +324,17 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontSize: 20,
     marginTop: 15,
-    color: '#1d5ede',
+    color: "#1d5ede",
   },
   itsname: {
     fontWeight: "bold",
     fontSize: 19,
     marginTop: 15,
-    color: '#1d5ede',
+    color: "#1d5ede",
   },
   middleText: {
     margin: 3,
-    color: '#1d5ede',
-    textAlign: 'center',
+    color: "#1d5ede",
+    textAlign: "center",
   },
 });

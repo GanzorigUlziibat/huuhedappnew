@@ -11,33 +11,32 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import * as SQLite from 'expo-sqlite';
-import needful from '../components/needful';
-import { Audio } from 'expo-av';
+import needful from "../components/needful";
+import { Audio } from "expo-av";
+import { useSQLiteContext } from "expo-sqlite";
 
 export default function Delgerengui({ navigation, route }) {
   // const route = useRoute();
-  const db = SQLite.openDatabaseSync('babyDatabase.db');
+  const db = useSQLiteContext();
   const { sid } = route.params;
   const [subItemList, setSubItemList] = useState([]);
   useEffect(() => {
     // Select query
     //amitad
-    db.transaction((tx) => {
-        try {
-
-        let query = 'SELECT * FROM baby_subitem INNER JOIN baby_subitemcount ON baby_subitem.iid = baby_subitemcount.countid INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_subitem.sid = ' + sid + ' AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY CASE WHEN baby_sub.shuffle = 1 THEN RANDOM() ELSE baby_subitem.item_id END';
+    const fetchData = async () => {
+      try {
+        let query =
+          "SELECT * FROM baby_subitem INNER JOIN baby_subitemcount ON baby_subitem.iid = baby_subitemcount.countid INNER JOIN baby_sub ON baby_subitem.sid = baby_sub.sid WHERE baby_subitem.sid = " +
+          sid +
+          " AND baby_subitem.active = 1 AND baby_sub.active = 1 ORDER BY CASE WHEN baby_sub.shuffle = 1 THEN RANDOM() ELSE baby_subitem.item_id END";
         // console.log(query);
-        tx.executeSql(query, [], (_, { rows }) => {
-          const result = rows._array;
-
-          setSubItemList(result);
-
-        });
-        } catch (error) {
-        console.log('Error executing select query:', error);
-        }
-    });
+        const result = await db.getAllAsync(query, []);
+        setSubItemList(result);
+      } catch (error) {
+        console.log("Error executing select query:", error);
+      }
+    };
+    fetchData();
   }, []);
 
   // const playItemSound = async () => {
@@ -58,13 +57,12 @@ export default function Delgerengui({ navigation, route }) {
         await soundObject.loadAsync(soundResource);
         await soundObject.playAsync();
       } else {
-        console.warn('Sound resource not found for item:', iid);
+        console.warn("Sound resource not found for item:", iid);
       }
     } catch (error) {
-      console.error('Failed to play sound', error);
+      console.error("Failed to play sound", error);
     }
   };
-  
 
   // алдааг олсон i утга 0- тэй тэнцүү байж алдаа зөв болно
   const amitadtablist = (ind) => {
@@ -73,21 +71,21 @@ export default function Delgerengui({ navigation, route }) {
     for (let i = 0; i < subItemList.length; i++) {
       tabbody.push(
         <Pressable
-          key={'press' + subItemList[i].item_id}
+          key={"press" + subItemList[i].item_id}
           onPress={() => {
-            navigation.navigate("Delgerengui3", { item_id: subItemList[i].iid }) ||
-              playItemSound(subItemList[i].iid)
+            navigation.navigate("Delgerengui3", {
+              item_id: subItemList[i].iid,
+            }) || playItemSound(subItemList[i].iid);
             console.log(subItemList[i].iid);
             alert(i);
           }}
         >
-
           <View style={styles.items}>
             <View style={styles.iv}>
               <Image
                 style={styles.i}
-                key={'item' + subItemList[i].item_id}
-                source={needful.subitem['item' + subItemList[i].iid].image}
+                key={"item" + subItemList[i].item_id}
+                source={needful.subitem["item" + subItemList[i].iid].image}
               />
               {/* <Text>{subItemList[i].item_name}</Text> */}
             </View>
@@ -105,16 +103,14 @@ export default function Delgerengui({ navigation, route }) {
         <View style={styles.thead}>
           <AntDesign name="arrowleft" style={styles.thicon} />
           {subItemList.length > 0 && (
-            <Text style={styles.thtxt} key={'text' + subItemList[1]?.sub_name}>
+            <Text style={styles.thtxt} key={"text" + subItemList[1]?.sub_name}>
               {subItemList[1]?.sub_name}
             </Text>
           )}
         </View>
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.card}>
-          {amitadtablist()}
-        </View>
+        <View style={styles.card}>{amitadtablist()}</View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -155,14 +151,14 @@ const styles = StyleSheet.create({
     width: 110,
     height: 160,
     flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 12,
     borderWidth: 5,
     borderColor: "purple",
   },
   i: {
-    width: '100%',
+    width: "100%",
     height: 600,
     resizeMode: "contain",
   },

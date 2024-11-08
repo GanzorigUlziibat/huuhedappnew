@@ -1,27 +1,34 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, StatusBar, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  StatusBar,
+  Platform,
+} from "react-native";
 import React, { useEffect, useState } from "react";
-import needful from '../components/needful';
-import * as SQLite from 'expo-sqlite';
+import needful from "../components/needful";
+import { useSQLiteContext } from "expo-sqlite";
 
 export default function Delgerengui3({ route, navigation }) {
-  const db = SQLite.openDatabaseSync('babyDatabase.db');
+  const db = useSQLiteContext();
   const [subItem, setSubItem] = useState([]);
   const { item_id } = route.params;
 
   useEffect(() => {
     // Select query
-    db.transaction((tx) => {
+    const fetchData = async () => {
       try {
-        let query = 'SELECT * FROM baby_subitem WHERE iid = ' + item_id + '';
+        let query = "SELECT * FROM baby_subitem WHERE iid = " + item_id + "";
         // console.log(query);
-        tx.executeSql(query, [item_id], (_, { rows }) => {
-        const result = rows._array;
+        const result = await db.getAllAsync(query, [item_id]);
         setSubItem(result);
-        });
       } catch (error) {
-        console.log('Error executing select query:', error);
+        console.log("Error executing select query:", error);
       }
-    });
+    };
+    fetchData();
   }, []);
   const subItems = () => {
     const tabbody = [];
@@ -36,16 +43,16 @@ export default function Delgerengui3({ route, navigation }) {
         //   }}
         // >
         // </Pressable >
-        <View style={styles.items}>
-          <Text key={'txt' + subItem[i].item_id}
-            style={styles.itemtxt}>{subItem[i].item_name}</Text>
-            <Image
-              style={styles.i}
-              key={'img' + subItem[i].item_id}
-              source={needful.subitem['item' + subItem[i].iid].image}
-            />
-          </View>
-
+        <View key={subItem[i].item_id} style={styles.items}>
+          <Text key={"txt" + subItem[i].item_id} style={styles.itemtxt}>
+            {subItem[i].item_name}
+          </Text>
+          <Image
+            style={styles.i}
+            key={"img" + subItem[i].item_id}
+            source={needful.subitem["item" + subItem[i].iid].image}
+          />
+        </View>
       );
     }
 
@@ -54,9 +61,7 @@ export default function Delgerengui3({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        {subItems()}
-      </View>
+      <View>{subItems()}</View>
     </SafeAreaView>
   );
 }
@@ -67,18 +72,18 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   items: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   i: {
     width: "100%",
     height: 600,
-    resizeMode: "contain"
+    resizeMode: "contain",
   },
   itemtxt: {
-    fontFamily: 'Arial',
+    fontFamily: "Arial",
     fontSize: 40,
-    fontWeight: '900',
-    textTransform: 'lowercase',
-  }
+    fontWeight: "900",
+    textTransform: "lowercase",
+  },
 });
