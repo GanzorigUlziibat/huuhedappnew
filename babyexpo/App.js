@@ -13,7 +13,7 @@ export default function App() {
   return (
     <SQLiteProvider
       databaseName="babyDatabase.db"
-      assetSource={{ assetId: require("./src/screens/babyDatabase.db") }}
+      assetSource={{ assetId: require("./assets/babyDatabase.db") }}
     >
       <NavigationContainer>
         <HomeStack.Navigator

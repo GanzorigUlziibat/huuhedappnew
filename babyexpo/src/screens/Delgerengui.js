@@ -77,17 +77,18 @@ export default function Delgerengui({ navigation, route }) {
               item_id: subItemList[i].iid,
             }) || playItemSound(subItemList[i].iid);
             console.log(subItemList[i].iid);
-            alert(i);
+            // alert(i);
           }}
         >
           <View style={styles.items}>
             <View style={styles.iv}>
-              <Image
+              {/* <Image
                 style={styles.i}
                 key={"item" + subItemList[i].item_id}
                 source={needful.subitem["item" + subItemList[i].iid].image}
-              />
-              {/* <Text>{subItemList[i].item_name}</Text> */}
+              /> */}
+
+              <Text>{subItemList[i].item_name}</Text>
             </View>
           </View>
         </Pressable>

@@ -1,4 +1,4 @@
-const need = {
+const needful = {
   cat: {
     cat1: {
       sound: require('../sounds/cat/cat1.mp3'),
@@ -6489,4 +6489,4 @@ const need = {
   },
 };
 
-export default need;
+export default needful;

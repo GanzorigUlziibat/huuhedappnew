@@ -110,7 +110,7 @@ export default function Tabs({ props }) {
                 key={"image" + subListAmitan[i].sid}
                 style={styles.postericon}
                 source={needful.sub["sub" + sub?.sid]?.image}
-              ></Image>
+              />
               <Text
                 key={"txt" + subListAmitan[i].sid}
                 style={styles.postertext}

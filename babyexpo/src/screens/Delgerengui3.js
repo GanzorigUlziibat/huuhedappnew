@@ -7,6 +7,7 @@ import {
   StatusBar,
   Platform,
 } from "react-native";
+import * as Font from 'expo-font';
 import React, { useEffect, useState } from "react";
 import needful from "../components/needful";
 import { useSQLiteContext } from "expo-sqlite";
